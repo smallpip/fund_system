@@ -1,2 +1,2 @@
-# fund_system
-this is my gradutae designation
+# smallpp-Graduation-design
+Graduation design
