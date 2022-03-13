@@ -1,9 +1,10 @@
-# -*- coding: utf-8 -*-
 
+# -*- coding: utf-8 -*-
+import sys
 import os
 
 # from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
-from PySide2.QtGui import QImageReader
+from PySide2.QtGui import QImageReader, QPixmap
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication
 from pyqt5_tools.examples.exampleqmlitem import QtCore
@@ -14,7 +15,12 @@ from database import login_opreate
 from lib.share import SI
 
 
+
 # 登录窗口
+from student import student
+from teacher import teacher
+
+
 class Win_Login(object):
 
     def __init__(self):
@@ -45,14 +51,14 @@ class Win_Login(object):
             comtext = self.ui.combox_login.currentText()
             if comtext == "学生":
                 # 实例化一个窗口
-                SI.mainWin = Win_Main()
+                SI.mainWin = student.Win_Main()
                 # 显示新窗口
                 SI.mainWin.ui.show()
                 # 清除密码
                 self.ui.edit_password.setText('')
                 self.ui.hide()
             else:
-                SI.mainWin = Win_tcmain()
+                SI.mainWin = teacher.Win_tcmain()
                 # 显示新窗口
                 SI.mainWin.ui.show()
                 # 清除密码
@@ -75,39 +81,13 @@ class Win_register():
         SI.loginWin.ui.show()
 
 
-# 老师窗口
-class Win_tcmain:
-    def __init__(self, j=None):
-        # super().__init__()
-        # self.ui = uic.loadUi('fund_system/main.ui',self)
-        self.ui = QUiLoader().load('UI/tc_main.ui')
-        self.ui.buttonChange.clicked.connect(self.onSignOut)  # 切换账号
-
-    def onSignOut(self):
-        SI.mainWin.ui.hide()
-        SI.loginWin.ui.show()
-
-
-# 学生窗口
-class Win_Main:
-    def __init__(self, j=None):
-        # super().__init__()
-        # self.ui = uic.loadUi('fund_system/main.ui',self)
-        self.ui = QUiLoader().load('UI/main.ui')
-        self.ui.buttonChange.clicked.connect(self.onSignOut)  # 切换账号
-
-    def onSignOut(self):
-        SI.mainWin.ui.hide()
-        SI.loginWin.ui.show()
-
-
 extra = {
     # Font
     'font_family': '黑体',
 }
 
 QImageReader.supportedImageFormats()
-app = QApplication([])
+app = QApplication(sys.argv)
 app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
 SI.loginWin = Win_Login()
 # 添加样式

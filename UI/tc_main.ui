@@ -129,7 +129,7 @@
          <item>
           <widget class="QLabel" name="label_12">
            <property name="text">
-            <string>同学</string>
+            <string>管理员</string>
            </property>
           </widget>
          </item>
@@ -172,7 +172,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="tabBarAutoHide">
          <bool>false</bool>

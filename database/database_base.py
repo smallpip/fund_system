@@ -74,3 +74,18 @@ def is_has(username):
         return True
     else:
         return False
+
+def is_has_student(username):
+    db = open()
+    cursor = db.cursor()
+    sql = "SELECT * FROM studentinfo WHERE id='%s'" % username
+    cursor.execute(sql)  # 执行mysql语句
+    db.commit()
+    data = cursor.fetchall()  # 获取所有的内容
+    cursor.close()
+    print(data)
+    db.close()
+    if data:
+        return True
+    else:
+        return False

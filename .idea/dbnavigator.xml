@@ -38,6 +38,7 @@
     <connection id="03d4cc92-c89c-4687-ab18-34c906336bc7" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="03d4cc92-c89c-4687-ab18-34c906336bc7" dataset="fund_system.studentinfo" active-filter-id="" />
     <filter-actions connection-id="03d4cc92-c89c-4687-ab18-34c906336bc7" dataset="fund_system.userinfo" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
