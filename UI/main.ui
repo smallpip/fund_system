@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1216</width>
-    <height>837</height>
+    <width>1222</width>
+    <height>853</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -100,7 +100,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="label_huanyin">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Fixed" vsizetype="Maximum">
            <horstretch>0</horstretch>
@@ -121,6 +121,13 @@
          </property>
          <property name="text">
           <string>:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_huanyin2">
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
@@ -170,7 +177,7 @@
        <enum>QTabWidget::North</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="tabBarAutoHide">
        <bool>false</bool>
@@ -191,10 +198,10 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QTableWidget" name="tableWidget"/>
+             <widget class="QTableWidget" name="student_news_table"/>
             </item>
             <item>
-             <widget class="QCalendarWidget" name="calendarWidget"/>
+             <widget class="QCalendarWidget" name="student_calendar"/>
             </item>
            </layout>
           </widget>
@@ -249,7 +256,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_username"/>
+                   <widget class="QLabel" name="student_username">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -276,7 +287,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_home"/>
+                   <widget class="QLabel" name="student_home">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -303,7 +318,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_phone"/>
+                   <widget class="QLabel" name="student_phone">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -332,7 +351,11 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QLineEdit" name="student_college"/>
+                 <widget class="QLabel" name="student_college">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
                 </item>
                 <item>
                  <spacer name="horizontalSpacer_9">
@@ -357,7 +380,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_class"/>
+                   <widget class="QLabel" name="student_class">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -388,7 +415,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_id"/>
+                   <widget class="QLabel" name="student_id">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -415,7 +446,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_birth"/>
+                   <widget class="QLabel" name="student_birth">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -445,7 +480,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_email"/>
+                   <widget class="QLabel" name="student_email">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -476,7 +515,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_sfzid"/>
+                   <widget class="QLabel" name="student_sfzid">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -503,7 +546,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_live"/>
+                   <widget class="QLabel" name="student_live">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -548,24 +595,9 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_identity">
-                    <property name="sizePolicy">
-                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                      <horstretch>0</horstretch>
-                      <verstretch>0</verstretch>
-                     </sizepolicy>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>50</width>
-                      <height>0</height>
-                     </size>
-                    </property>
-                    <property name="maximumSize">
-                     <size>
-                      <width>50</width>
-                      <height>16777215</height>
-                     </size>
+                   <widget class="QLabel" name="student_identity">
+                    <property name="text">
+                     <string/>
                     </property>
                    </widget>
                   </item>
@@ -598,7 +630,11 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="student_income"/>
+                   <widget class="QLabel" name="student_income">
+                    <property name="text">
+                     <string/>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -626,6 +662,11 @@
                   </item>
                   <item>
                    <widget class="QComboBox" name="comboBox_pinkun">
+                    <item>
+                     <property name="text">
+                      <string>无</string>
+                     </property>
+                    </item>
                     <item>
                      <property name="text">
                       <string>低保</string>
@@ -681,6 +722,11 @@
                    <widget class="QComboBox" name="comboBox_hukou">
                     <item>
                      <property name="text">
+                      <string>无</string>
+                     </property>
+                    </item>
+                    <item>
+                     <property name="text">
                       <string>城镇</string>
                      </property>
                     </item>
@@ -728,6 +774,13 @@
                  </size>
                 </property>
                </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="button_refresh">
+                <property name="text">
+                 <string>刷新</string>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QPushButton" name="info_change">

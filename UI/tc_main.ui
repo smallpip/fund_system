@@ -102,7 +102,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_huantin">
+          <widget class="QLabel" name="label_huanyin">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -121,6 +121,13 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_huanyin2">
            <property name="text">
             <string/>
            </property>
@@ -172,7 +179,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>2</number>
         </property>
         <property name="tabBarAutoHide">
          <bool>false</bool>
@@ -553,7 +560,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="teacher_home"/>
+                     <widget class="QLabel" name="teacher_home">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -597,7 +608,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="teacher_phone"/>
+                     <widget class="QLabel" name="teacher_phone">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -641,7 +656,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="teacher_id"/>
+                     <widget class="QLabel" name="teacher_id">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -685,7 +704,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="teacher_college"/>
+                     <widget class="QLabel" name="teacher_college">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -732,7 +755,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="teacher_email"/>
+                     <widget class="QLabel" name="teacher_email">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -754,13 +781,6 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_37">
                   <item>
-                   <widget class="QPushButton" name="button_refresh">
-                    <property name="text">
-                     <string>刷新</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
                    <spacer name="horizontalSpacer_41">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
@@ -772,6 +792,13 @@
                      </size>
                     </property>
                    </spacer>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="button_refresh">
+                    <property name="text">
+                     <string>刷新</string>
+                    </property>
+                   </widget>
                   </item>
                   <item>
                    <widget class="QPushButton" name="button_tcchange">
@@ -824,7 +851,7 @@
              </attribute>
              <layout class="QHBoxLayout" name="horizontalLayout_58">
               <item>
-               <widget class="QTableWidget" name="tableWidget">
+               <widget class="QTableWidget" name="tc_news_table">
                 <property name="sizeIncrement">
                  <size>
                   <width>0</width>
@@ -849,21 +876,6 @@
                 <attribute name="verticalHeaderDefaultSectionSize">
                  <number>35</number>
                 </attribute>
-                <row>
-                 <property name="text">
-                  <string>New Row</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>New Row</string>
-                 </property>
-                </row>
-                <row>
-                 <property name="text">
-                  <string>New Row</string>
-                 </property>
-                </row>
                 <column>
                  <property name="text">
                   <string>内容</string>
@@ -880,29 +892,12 @@
                   <set>AlignCenter</set>
                  </property>
                 </column>
-                <item row="0" column="0">
-                 <property name="text">
-                  <string/>
-                 </property>
-                 <property name="toolTip">
-                  <string/>
-                 </property>
-                 <property name="font">
-                  <font>
-                   <strikeout>false</strikeout>
-                   <stylestrategy>NoAntialias</stylestrategy>
-                  </font>
-                 </property>
-                 <property name="textAlignment">
-                  <set>AlignLeading|AlignTop</set>
-                 </property>
-                </item>
                </widget>
               </item>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_14">
                 <item>
-                 <widget class="QCalendarWidget" name="calendarWidget"/>
+                 <widget class="QCalendarWidget" name="tc_calendar"/>
                 </item>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_4">

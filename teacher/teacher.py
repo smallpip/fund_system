@@ -45,6 +45,9 @@ class Win_tcmain:
         SI.teacher_email = teacher_operate.teacher_op.select_teacherinfo(a, SI.login_username)
         self.ui.teacher_email.setText(SI.teacher_email)
 
+        #标题栏
+        self.ui.label_huanyin.setText(SI.login_username)
+        self.ui.label_huanyin2.setText(SI.teacher_name)
 
 
 
@@ -63,6 +66,7 @@ class Win_tcmain:
         self.ui.teacher_id.setText(SI.teacher_id_2)
         self.ui.teacher_college.setText(SI.teacher_college_2)
         self.ui.teacher_email.setText(SI.teacher_email_2)
+        self.ui.label_huanyin2.setText(SI.teacher_name_2)
 
 
 class Win_teacher_change(Win_tcmain):
