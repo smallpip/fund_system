@@ -219,7 +219,7 @@
       <widget class="QWidget" name="tab_1">
        <attribute name="icon">
         <iconset>
-         <normaloff>../../../.designer/backup/img/计划，备注.png</normaloff>../../../.designer/backup/img/计划，备注.png</iconset>
+         <normaloff>../../../../.designer/backup/img/计划，备注.png</normaloff>../../../../.designer/backup/img/计划，备注.png</iconset>
        </attribute>
        <attribute name="title">
         <string>信息管理</string>
@@ -707,12 +707,12 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_16">
+               <widget class="QLabel" name="student_img">
                 <property name="text">
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap>../img/人脸识别.png</pixmap>
+                 <pixmap>../img/个人信息.jpg</pixmap>
                 </property>
                </widget>
               </item>
@@ -1217,6 +1217,8 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources/>
+ <resources>
+  <include location="../img/img.qrc"/>
+ </resources>
  <connections/>
 </ui>

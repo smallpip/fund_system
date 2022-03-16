@@ -7,8 +7,6 @@ from pyqt5_tools.examples.exampleqmlitem import QtCore
 import sys
 
 from database import database_base
-
-sys.path.append("../../fund system/fund_system/")  # 返回上层路径
 from lib.share import SI
 
 

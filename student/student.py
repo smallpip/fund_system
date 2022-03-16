@@ -3,7 +3,7 @@
 import os
 
 # from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
-from PySide2.QtGui import QImageReader
+from PySide2.QtGui import QImageReader, QPixmap
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication, QMessageBox
 from pyqt5_tools.examples.exampleqmlitem import QtCore
@@ -25,56 +25,61 @@ class Win_Main:
         self.ui.buttonChange.clicked.connect(self.onSignOut)  # 切换账号
         self.ui.info_change.clicked.connect(self.on_student_info_change)
 
+
         # 个人信息
+        pic = QPixmap('img/个人信息.jpg')
+        self.ui.student_img.setPixmap(pic)
+        self.ui.student_img.setScaledContents(True)
+
         if database_base.is_has_student(SI.login_username) is False:  # 如果第一次登录没有表
             sql = "INSERT INTO studentinfo(id) VALUES('%s')" % SI.login_username
             database_base.insert(sql)
+            print("已完成第一次学生建表")
 
         #个人信息获取
-        self.ui.student_id.settext(SI.login_username)
+        self.ui.student_id.setText(SI.login_username)
 
-        a = 'username'
+        a = 'name'
         SI.student_username = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_username.settext(SI.student_username)
+        self.ui.student_username.setText(SI.student_username)
         a = 'home'
         SI.student_home = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_home.settext(SI.student_home)
+        self.ui.student_home.setText(SI.student_home)
         a = 'phone'
         SI.student_phone = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_phone.settext(SI.student_home)
+        self.ui.student_phone.setText(SI.student_home)
         a = 'college'
         SI.student_college = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_college.settext(SI.student_college)
+        self.ui.student_college.setText(SI.student_college)
         a = 'class'
         SI.student_class = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_class.settext(SI.student_class)
+        self.ui.student_class.setText(SI.student_class)
         a = 'email'
         SI.student_email = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_email.settext(SI.student_email)
+        self.ui.student_email.setText(SI.student_email)
         a = 'sfzid'
         SI.student_sfzid = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_sfzid.settext(SI.student_sfzid)
+        self.ui.student_sfzid.setText(SI.student_sfzid)
         a = 'live'
         SI.student_live = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_live.settext(SI.student_live)
-        a = 'dentity'
+        self.ui.student_live.setText(SI.student_live)
+        a = 'identity'
         SI.student_identity = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_identity.settext(SI.student_identity)
+        self.ui.student_identity.setText(SI.student_identity)
         a = 'income'
         SI.student_income = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_income.settext(SI.student_income)
+        self.ui.student_income.setText(SI.student_income)
         a = 'pinkun'
-        SI.student_pinkun = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_pinkun.currentText(SI.student_pinkun)
+        SI.comboBox_pinkun = student_opreate.student_op.select_studentinfo(a, SI.login_username)
+        self.ui.comboBox_pinkun.setCurrentText(SI.comboBox_pinkun)
         a = 'hukou'
-        SI.student_hukou = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_hukou.currentText(SI.student_hukou)
+        SI.comboBox_hukou = student_opreate.student_op.select_studentinfo(a, SI.login_username)
+        self.ui.comboBox_hukou.setCurrentText(SI.comboBox_pinkun)
         a = 'birth'
         SI.student_birth = student_opreate.student_op.select_studentinfo(a, SI.login_username)
-        self.ui.student_birth.settext(SI.student_birth)
+        self.ui.student_birth.setText(SI.student_birth)
 
     def on_student_info_change(self):
-        super(Win_Main, self).on_student_info_change()
         SI.student_change = Win_student_change()
         SI.student_change.ui.show()
 
@@ -85,8 +90,11 @@ class Win_Main:
 
 class Win_student_change():
     def __init__(self):
-        self.ui = QUiLoader().load('../UI/student_change.ui')
+        self.ui = QUiLoader().load('UI/student_change.ui')
         self.ui.butto_sure.clicked.connect(self.onchangeout)
+
+
+    def onchangeout(self):
         SI.student_username_2 = self.ui.student_username_2.text().strip()
         SI.student_home_2 = self.ui.student_home_2.text().strip()
         SI.student_phone_2 = self.ui.student_phone_2.text().strip()
@@ -96,15 +104,28 @@ class Win_student_change():
         SI.student_email_2 = self.ui.student_email_2.text().strip()
         SI.student_sfzid_2 = self.ui.student_sfzid_2.text().strip()
         SI.student_live_2 = self.ui.student_live_2.text().strip()
-        SI.student_birth_2=self.ui.student_birth_2.text().strip()
+        SI.student_birth_2 = self.ui.student_birth_2.text().strip()
         SI.student_identity_2 = self.ui.student_identity_2.text().strip()
         SI.student_income_2 = self.ui.student_income_2.text().strip()
-        SI.student_pinkung_2 = self.ui.comboBox_pinkun_2.currentText()
-        SI.student_hukou_2 = self.ui.comboBox_hukou_2.currentText()
-
-    def onchangeout(self):
+        SI.comboBox_pinkung_2 = self.ui.comboBox_pinkun_2.currentText()
+        SI.comboBox_hukou_2 = self.ui.comboBox_hukou_2.currentText()
         if not SI.student_id_2:
             QMessageBox.information(self.ui, 'Error', '请输入必选项', QMessageBox.Yes)
         else:
-            student_opreate.info_change_op();
+            student_opreate.student_op.info_change_op(self);
             SI.student_change.ui.close()
+
+        self.ui.student_id.setText(SI.student_id_2)
+        self.ui.student_username.setText(SI.student_username_2)
+        self.ui.student_home.setText(SI.student_home_2)
+        self.ui.student_phone.setText(SI.student_home_2)
+        self.ui.student_college.setText(SI.student_college_2)
+        self.ui.student_class.setText(SI.student_class_2)
+        self.ui.student_email.setText(SI.student_email_2)
+        self.ui.student_sfzid.setText(SI.student_sfzid_2)
+        self.ui.student_live.setText(SI.student_live_2)
+        self.ui.student_identity.setText(SI.student_identity_2)
+        self.ui.student_income.setText(SI.student_income_2)
+        self.ui.comboBox_pinkun.setCurrentText(SI.comboBox_pinkun_2)
+        self.ui.comboBox_hukou.setCurrentText(SI.comboBox_pinkun_2)
+        self.ui.student_birth.setText(SI.student_birth_2)

@@ -78,14 +78,32 @@ def is_has(username):
 def is_has_student(username):
     db = open()
     cursor = db.cursor()
-    sql = "SELECT * FROM studentinfo WHERE id='%s'" % username
+    sql = "SELECT distinct * FROM studentinfo WHERE id='%s'" % username
     cursor.execute(sql)  # 执行mysql语句
     db.commit()
     data = cursor.fetchall()  # 获取所有的内容
     cursor.close()
     print(data)
+    print('已调用is_has_student')
     db.close()
     if data:
         return True
     else:
         return False
+
+def is_has_teacher(username):
+    db = open()
+    cursor = db.cursor()
+    sql = "SELECT distinct * FROM teacherinfo WHERE id='%s'" % username
+    cursor.execute(sql)  # 执行mysql语句
+    db.commit()
+    data = cursor.fetchall()  # 获取所有的内容
+    cursor.close()
+    print(data)
+    print('已调用is_has_teacher')
+    db.close()
+    if data:
+        return True
+    else:
+        return False
+

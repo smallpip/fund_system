@@ -259,7 +259,7 @@
            <item>
             <widget class="QLineEdit" name="student_sfzid_2">
              <property name="text">
-              <string>3</string>
+              <string/>
              </property>
             </widget>
            </item>
@@ -507,7 +507,7 @@
           <string/>
          </property>
          <property name="pixmap">
-          <pixmap>../img/人脸识别.png</pixmap>
+          <pixmap>../../../.designer/img/人脸识别.png</pixmap>
          </property>
         </widget>
        </item>

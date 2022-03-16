@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1224</width>
-    <height>800</height>
+    <height>829</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -185,7 +185,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_6">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab_20">
              <attribute name="title">
@@ -399,7 +399,7 @@
         <widget class="QWidget" name="tab_1">
          <attribute name="icon">
           <iconset>
-           <normaloff>img/计划，备注.png</normaloff>img/计划，备注.png</iconset>
+           <normaloff>../../../../.designer/backup/img/计划，备注.png</normaloff>../../../../.designer/backup/img/计划，备注.png</iconset>
          </attribute>
          <attribute name="title">
           <string>信息管理</string>
@@ -442,7 +442,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTextEdit" name="textEdit_3">
+                     <widget class="QTextEdit" name="teacher_img">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -505,7 +505,11 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_3"/>
+                     <widget class="QLabel" name="teacher_name">
+                      <property name="text">
+                       <string/>
+                      </property>
+                     </widget>
                     </item>
                    </layout>
                   </item>
@@ -549,7 +553,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_9"/>
+                     <widget class="QLineEdit" name="teacher_home"/>
                     </item>
                    </layout>
                   </item>
@@ -593,7 +597,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_12"/>
+                     <widget class="QLineEdit" name="teacher_phone"/>
                     </item>
                    </layout>
                   </item>
@@ -637,7 +641,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_4"/>
+                     <widget class="QLineEdit" name="teacher_id"/>
                     </item>
                    </layout>
                   </item>
@@ -681,7 +685,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_17"/>
+                     <widget class="QLineEdit" name="teacher_college"/>
                     </item>
                    </layout>
                   </item>
@@ -728,7 +732,7 @@
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="lineEdit_18"/>
+                     <widget class="QLineEdit" name="teacher_email"/>
                     </item>
                    </layout>
                   </item>
@@ -750,6 +754,13 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_37">
                   <item>
+                   <widget class="QPushButton" name="button_refresh">
+                    <property name="text">
+                     <string>刷新</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
                    <spacer name="horizontalSpacer_41">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
@@ -763,7 +774,7 @@
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton_4">
+                   <widget class="QPushButton" name="button_tcchange">
                     <property name="text">
                      <string>修改</string>
                     </property>
