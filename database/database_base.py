@@ -46,9 +46,17 @@ def query(sql):
     result = cursor.fetchone()  # 记录查询结果
     cursor.close()  # 关闭游标
     db.close()  # 关闭数据库连接
-    print(''.join(map(str,result)))
     return ''.join(map(str,result)) # 返回查询结果
 
+
+def query2(sql):
+    db = open()  # 连接数据库
+    cursor = db.cursor()  # 使用cursor()方法获取操作游标
+    cursor.execute(sql)  # 执行查询SQL语句
+    result = cursor.fetchall()  # 记录查询结果
+    cursor.close()  # 关闭游标
+    db.close()  # 关闭数据库连接
+    return result
 
 def insert(sql):
     db = open()  # 连接数据库
@@ -68,7 +76,6 @@ def is_has(username):
     db.commit()
     data = cursor.fetchall()  # 获取所有的内容
     cursor.close()
-    print(data)
     db.close()
     if data:
         return True
@@ -83,8 +90,6 @@ def is_has_student(username):
     db.commit()
     data = cursor.fetchall()  # 获取所有的内容
     cursor.close()
-    print(data)
-    print('已调用is_has_student')
     db.close()
     if data:
         return True
@@ -99,8 +104,6 @@ def is_has_teacher(username):
     db.commit()
     data = cursor.fetchall()  # 获取所有的内容
     cursor.close()
-    print(data)
-    print('已调用is_has_teacher')
     db.close()
     if data:
         return True

@@ -198,7 +198,28 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QTableWidget" name="student_news_table"/>
+             <widget class="QTableWidget" name="student_news_table">
+              <row>
+               <property name="text">
+                <string/>
+               </property>
+              </row>
+              <row>
+               <property name="text">
+                <string/>
+               </property>
+              </row>
+              <column>
+               <property name="text">
+                <string/>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string/>
+               </property>
+              </column>
+             </widget>
             </item>
             <item>
              <widget class="QCalendarWidget" name="student_calendar"/>

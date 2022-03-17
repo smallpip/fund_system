@@ -3,10 +3,11 @@
 import os
 
 # from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
+from PySide2 import QtWidgets
 from PySide2.QtCore import QDate
 from PySide2.QtGui import QImageReader, QPixmap
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication, QMessageBox
+from PySide2.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QAbstractItemView
 from pyqt5_tools.examples.exampleqmlitem import QtCore
 from qt_material import apply_stylesheet
 # 目录导入
@@ -86,9 +87,26 @@ class Win_Main:
         self.ui.label_huanyin.setText(SI.login_username)
         self.ui.label_huanyin2.setText(SI.student_username)
 
+        #公告栏
+        self.ui.student_news_table.setHorizontalHeaderLabels(['内容', '发布者'])
+        self.ui.student_news_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
+        self.ui.student_news_table.resizeColumnsToContents()
+        self.ui.student_news_table.resizeRowsToContents()
+
     def showNews(self,date):
         print(date.toString())
-        # student_opreate.student_op.news_op(date.toString())
+        self.ui.student_news_table.clearContents()
+        data=student_opreate.student_op.news_op(date.toString())
+        print(data)
+        x = 0
+        for i in data:
+            y = 0
+            for j in i:
+                a= QTableWidgetItem(str(data[x][y]))
+                self.ui.student_news_table.setItem(x, y,a)
+                y = y + 1
+            x = x + 1
+
 
 
 
