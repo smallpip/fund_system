@@ -37,6 +37,7 @@ class student_op():
         print(sql)
         database_base.insert(sql)
 
-    def news_op(data):
-        sql="select * from news where data='%s'"%data
-        return database_base.query(sql)
+    def news_op(date):
+        sql="select content,time from newsinfo where time='%s' order by id desc;"%date
+        print(sql)
+        return database_base.query2(sql)
