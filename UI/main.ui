@@ -198,28 +198,7 @@
            </attribute>
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
-             <widget class="QTableWidget" name="student_news_table">
-              <row>
-               <property name="text">
-                <string/>
-               </property>
-              </row>
-              <row>
-               <property name="text">
-                <string/>
-               </property>
-              </row>
-              <column>
-               <property name="text">
-                <string/>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string/>
-               </property>
-              </column>
-             </widget>
+             <widget class="QTableWidget" name="student_news_table"/>
             </item>
             <item>
              <widget class="QCalendarWidget" name="student_calendar"/>
@@ -247,7 +226,7 @@
       <widget class="QWidget" name="tab_1">
        <attribute name="icon">
         <iconset>
-         <normaloff>../../../../.designer/backup/img/计划，备注.png</normaloff>../../../../.designer/backup/img/计划，备注.png</iconset>
+         <normaloff>../../../../../.designer/backup/img/计划，备注.png</normaloff>../../../../../.designer/backup/img/计划，备注.png</iconset>
        </attribute>
        <attribute name="title">
         <string>信息管理</string>
@@ -779,7 +758,7 @@
                  <string/>
                 </property>
                 <property name="pixmap">
-                 <pixmap>../img/个人信息.jpg</pixmap>
+                 <pixmap>../../../.designer/img/个人信息.jpg</pixmap>
                 </property>
                </widget>
               </item>

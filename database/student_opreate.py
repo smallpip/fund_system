@@ -38,6 +38,6 @@ class student_op():
         database_base.insert(sql)
 
     def news_op(date):
-        sql="select content,time from newsinfo where time='%s' order by id desc;"%date
+        sql="select content,username from newsinfo where time='%s' order by id desc;"%date
         print(sql)
         return database_base.query2(sql)

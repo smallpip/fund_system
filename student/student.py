@@ -7,7 +7,7 @@ from PySide2 import QtWidgets
 from PySide2.QtCore import QDate
 from PySide2.QtGui import QImageReader, QPixmap
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QAbstractItemView
+from PySide2.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
 from pyqt5_tools.examples.exampleqmlitem import QtCore
 from qt_material import apply_stylesheet
 # 目录导入
@@ -88,16 +88,24 @@ class Win_Main:
         self.ui.label_huanyin2.setText(SI.student_username)
 
         #公告栏
-        self.ui.student_news_table.setHorizontalHeaderLabels(['内容', '发布者'])
         self.ui.student_news_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
-        self.ui.student_news_table.resizeColumnsToContents()
-        self.ui.student_news_table.resizeRowsToContents()
+        self.ui.student_news_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        self.ui.student_news_table.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
+
+
+        #公告栏
     def showNews(self,date):
-        print(date.toString())
         self.ui.student_news_table.clearContents()
         data=student_opreate.student_op.news_op(date.toString())
         print(data)
+        self.ui.student_news_table.setColumnCount(2)
+        a=0
+        for i in data:
+            a=a+1
+        self.ui.student_news_table.setRowCount(a)
+        self.ui.student_news_table.setHorizontalHeaderLabels(['内容', '发布者'])
+
         x = 0
         for i in data:
             y = 0
@@ -118,6 +126,7 @@ class Win_Main:
         SI.mainWin.ui.hide()
         SI.loginWin.ui.show()
 
+#信息初始化
     def reget_info(self):
         self.ui.student_username.setText(SI.student_username_2)
         self.ui.student_home.setText(SI.student_home_2)
