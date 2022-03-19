@@ -1,21 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import os
-
 # from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
-from PySide2 import QtWidgets
 from PySide2.QtCore import QDate
-from PySide2.QtGui import QImageReader, QPixmap
+from PySide2.QtGui import QPixmap
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
-from pyqt5_tools.examples.exampleqmlitem import QtCore
-from qt_material import apply_stylesheet
+from PySide2.QtWidgets import QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView
+
 # 目录导入
 from database import database_base
-from database import login_opreate
-from lib.share import SI
-from teacher import teacher
 from database import student_opreate
+from lib.share import SI
 
 
 # 学生窗口
@@ -29,7 +23,6 @@ class Win_Main:
         self.ui.button_refresh.clicked.connect(self.reget_info)
         self.ui.student_calendar.clicked[QDate].connect(self.showNews)
 
-
         # 个人信息
         pic = QPixmap('img/个人信息.jpg')
         self.ui.student_img.setPixmap(pic)
@@ -37,10 +30,10 @@ class Win_Main:
 
         if database_base.is_has_student(SI.login_username) is False:  # 如果第一次登录没有表
             sql = "INSERT INTO studentinfo(id) VALUES('%s')" % SI.login_username
-            database_base.insert(sql)
+            database_base.exec(sql)
             print("已完成第一次学生建表")
 
-        #个人信息获取
+        # 个人信息获取
         self.ui.student_id.setText(SI.login_username)
 
         a = 'name'
@@ -87,22 +80,21 @@ class Win_Main:
         self.ui.label_huanyin.setText(SI.login_username)
         self.ui.label_huanyin2.setText(SI.student_username)
 
-        #公告栏
+        # 公告栏
         self.ui.student_news_table.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.ui.student_news_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.student_news_table.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
+        # 公告栏
 
-
-        #公告栏
-    def showNews(self,date):
+    def showNews(self, date):
         self.ui.student_news_table.clearContents()
-        data=student_opreate.student_op.news_op(date.toString())
+        data = student_opreate.student_op.news_op(date.toString())
         print(data)
         self.ui.student_news_table.setColumnCount(2)
-        a=0
+        a = 0
         for i in data:
-            a=a+1
+            a = a + 1
         self.ui.student_news_table.setRowCount(a)
         self.ui.student_news_table.setHorizontalHeaderLabels(['内容', '发布者'])
 
@@ -110,13 +102,10 @@ class Win_Main:
         for i in data:
             y = 0
             for j in i:
-                a= QTableWidgetItem(str(data[x][y]))
-                self.ui.student_news_table.setItem(x, y,a)
+                a = QTableWidgetItem(str(data[x][y]))
+                self.ui.student_news_table.setItem(x, y, a)
                 y = y + 1
             x = x + 1
-
-
-
 
     def on_student_info_change(self):
         SI.student_change = Win_student_change()
@@ -126,7 +115,7 @@ class Win_Main:
         SI.mainWin.ui.hide()
         SI.loginWin.ui.show()
 
-#信息初始化
+    # 信息初始化
     def reget_info(self):
         self.ui.student_username.setText(SI.student_username_2)
         self.ui.student_home.setText(SI.student_home_2)
@@ -144,11 +133,24 @@ class Win_Main:
         self.ui.label_huanyin2.setText(SI.student_username_2)
 
 
-
 class Win_student_change():
     def __init__(self):
         self.ui = QUiLoader().load('UI/student_change.ui')
         self.ui.butto_sure.clicked.connect(self.onchangeout)
+        self.ui.student_username_2.setText(SI.student_username)
+        self.ui.student_home_2.setText(SI.student_home)
+        self.ui.student_phone_2.setText(SI.student_phone)
+        self.ui.student_college_2.setText(SI.student_college)
+        self.ui.student_class_2.setText(SI.student_class)
+        self.ui.student_email_2.setText(SI.student_email)
+        self.ui.student_sfzid_2.setText(SI.student_sfzid)
+        self.ui.student_live_2.setText(SI.student_live)
+        self.ui.student_identity_2.setText(SI.student_identity)
+        self.ui.student_income_2.setText(SI.student_income)
+        self.ui.comboBox_pinkun_2.setCurrentText(SI.comboBox_pinkun)
+        self.ui.comboBox_hukou_2.setCurrentText(SI.comboBox_hukou)
+        self.ui.student_birth_2.setText(SI.student_birth)
+        self.ui.student_id_2.setText(SI.login_username)
 
 
     def onchangeout(self):

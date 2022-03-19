@@ -1,21 +1,15 @@
-
 # -*- coding: utf-8 -*-
-import sys
 import os
+import sys
 
 # from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
-from PySide2.QtGui import QImageReader, QPixmap
+from PySide2.QtGui import QImageReader
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication
-from pyqt5_tools.examples.exampleqmlitem import QtCore
 from qt_material import apply_stylesheet
 
-import database
 from database import login_opreate
 from lib.share import SI
-
-
-
 # 登录窗口
 from student import student
 from teacher import teacher
@@ -86,9 +80,9 @@ extra = {
     'font_family': '黑体',
 }
 
-QImageReader.supportedImageFormats()
+# QImageReader.supportedImageFormats()
 app = QApplication(sys.argv)
-app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
+# app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
 SI.loginWin = Win_Login()
 # 添加样式
 apply_stylesheet(app, theme='light_pink.xml', invert_secondary=True, extra=extra)

@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
-import sys
-from shlex import join
 
 import pymysql
-import mysql
-import mysql.connector
 
 
 def open():
@@ -27,7 +23,7 @@ def exec(sql, values):
         db.close()  # 关闭数据库连接
 
 
-#带参数的精确查询
+# 带参数的精确查询
 # def query(sql, *keys):
 #     db = open()  # 连接数据库
 #     cursor = db.cursor()  # 使用cursor()方法获取操作游标
@@ -46,7 +42,7 @@ def query(sql):
     result = cursor.fetchone()  # 记录查询结果
     cursor.close()  # 关闭游标
     db.close()  # 关闭数据库连接
-    return ''.join(map(str,result)) # 返回查询结果
+    return ''.join(map(str, result))  # 返回查询结果
 
 
 def query2(sql):
@@ -58,14 +54,14 @@ def query2(sql):
     db.close()  # 关闭数据库连接
     return result
 
-def insert(sql):
+
+def exec(sql):
     db = open()  # 连接数据库
     cursor = db.cursor()  # 使用cursor()方法获取操作游标
     cursor.execute(sql)  # 执行插入SQL语句
     db.commit()
     cursor.close()  # 关闭游标
     db.close()  # 关闭数据库连接
-    print("插入完成")
 
 
 def is_has(username):
@@ -82,6 +78,7 @@ def is_has(username):
     else:
         return False
 
+
 def is_has_student(username):
     db = open()
     cursor = db.cursor()
@@ -96,6 +93,7 @@ def is_has_student(username):
     else:
         return False
 
+
 def is_has_teacher(username):
     db = open()
     cursor = db.cursor()
@@ -109,4 +107,3 @@ def is_has_teacher(username):
         return True
     else:
         return False
-

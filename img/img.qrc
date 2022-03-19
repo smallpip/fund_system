@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="个人照片">
-    <file>人脸识别.png</file>
-  </qresource>
+    <qresource prefix="个人照片">
+        <file>人脸识别.png</file>
+    </qresource>
 </RCC>

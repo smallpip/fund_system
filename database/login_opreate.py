@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-import mysql
-from PySide2.QtGui import QImageReader
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow
-from PySide2.QtUiTools import QUiLoader
-from pyqt5_tools.examples.exampleqmlitem import QtCore
-import sys
+from PySide2.QtWidgets import QMessageBox
 
 from database import database_base
 from lib.share import SI
@@ -24,7 +19,7 @@ class login_op(object):
             if SI.register_password == SI.confirm and SI.register_password:  # 如果两次密码一致，并且不为空
                 sql = "INSERT INTO userinfo(username, password) VALUES('%s','%s')" % (
                     SI.register_username, SI.register_password)  # 添加入数据库
-                database_base.insert(sql)
+                database_base.exec(sql)
                 QMessageBox.information(self.ui, 'Successfully', '宝，注册成功'.format(SI.register_username),
                                         QMessageBox.Yes)
             else:

@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-import mysql
-from PySide2.QtGui import QImageReader
-from PySide2.QtWidgets import QApplication, QMessageBox, QMainWindow
-from PySide2.QtUiTools import QUiLoader
-from pyqt5_tools.examples.exampleqmlitem import QtCore
-import sys
 
 from database import database_base
 
@@ -29,4 +23,15 @@ class teacher_op():
             SI.teacher_email_2,
             SI.teacher_id_2)
         print(sql)
-        database_base.insert(sql)
+        database_base.exec(sql)
+
+    def publish_on(self, text):
+        print("publish_on已调用")
+        sql = "insert into newsinfo(content, time,username) VALUES('%s','%s','%s') " % (text, SI.publish_date, SI.teacher_name)
+        database_base.exec(sql)
+
+    def publish_out(self,text):
+        print('publish_out')
+        sql="delete from newsinfo where content='%s' "%text
+        database_base.exec(sql)
+
