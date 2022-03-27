@@ -107,3 +107,17 @@ def is_has_teacher(username):
         return True
     else:
         return False
+
+def is_has_apply(table,id):
+    db = open()
+    cursor = db.cursor()
+    sql = "SELECT distinct * FROM %s WHERE id=%s" % (table,id)
+    cursor.execute(sql)  # 执行mysql语句
+    db.commit()
+    data = cursor.fetchall()  # 获取所有的内容
+    cursor.close()
+    db.close()
+    if data:
+        return True
+    else:
+        return False

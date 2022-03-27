@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 
 from database import database_base
 
@@ -28,10 +29,75 @@ class student_op():
                                                                      SI.student_identity_2,
                                                                      SI.student_income_2,
                                                                      SI.student_id_2)
-        print(sql)
         database_base.exec(sql)
 
     def news_op(date):
         sql = "select content,username from newsinfo where time='%s' order by id desc;" % date
+        return database_base.query2(sql)
+
+    def apply_insert(self):
+        print('apply已调用')
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(time)
+        sql = "insert into %s(time,audit,name,fund,content,file,id,kind) VALUES('%s','未审核','%s','yes','%s','%s','%s'," \
+              "'%s');" % (
+                  SI.apply_fund, time, SI.student_username, SI.apply_text, SI.apply_file, SI.student_id,
+                  SI.apply_kind)
+        database_base.exec(sql)
+
+    def apply_table(self, fund):
+        print('fund_search已调用')
+        if fund == 1:
+            sql = "select time,id,name,audit,file,kind from fundinfo1 where id=%s union all select time,id,name,audit," \
+                  "file,kind from " \
+                  "fundinfo2 where id=%s union all select time,id,name,audit,file,kind from fundinfo3 where id='%s'" % (
+                      SI.student_id, SI.student_id, SI.student_id)
+            return database_base.query2(sql)
+        if fund == 2:
+            sql = "select time,id,name,audit,file,kind from fundinfo4 where id=%s union all select time,id,name,audit," \
+                  "file,kind from " \
+                  "fundinfo5 where id=%s;" % (SI.student_id, SI.student_id)
+            return database_base.query2(sql)
+        if fund == 3:
+            sql = "select time,id,name,audit,file,kind from fundinfo6 where id=%s  ;" % (SI.student_id)
+            return database_base.query2(sql)
+        sql = "select time,id,name,audit,file,kind from %s where id=%s;" % (fund, SI.student_id)
+        return database_base.query2(sql)
+
+    def apply_search(self, info):
+        sql = "select %s from %s where id=%s;" % (info, SI.apply_fund, SI.student_id)
+        return database_base.query2(sql)
+
+    def apply_out(self, table, id):
+        print('apply_out')
+        if table == '国家助学金': table = 'fundinfo1'
+        if table == '国家励志奖学金': table = 'fundinfo2'
+        if table == '国家助学贷款': table = 'fundinfo3'
+        if table == '1号奖助金': table = 'fundinfo4'
+        if table == '2号奖助金': table = 'fundinfo5'
+        if table == '校内资助金': table = 'fundinfo6'
+        sql = "delete from %s where id=%s " % (table.lstrip(''), id)
+        database_base.exec(sql)
+
+    def apply_change(self, table):
+        print('apply_out')
+        if table == '国家助学金': table = 'fundinfo1'
+        if table == '国家励志奖学金': table = 'fundinfo2'
+        if table == '国家助学贷款': table = 'fundinfo3'
+        if table == '1号奖助金': table = 'fundinfo4'
+        if table == '2号奖助金': table = 'fundinfo5'
+        if table == '校内资助金': table = 'fundinfo6'
+        sql = "UPDATE %s SET file='%s',content='%s' where id=%s" % (table.lstrip(''),SI.apply_file,SI.apply_text, SI.student_id)
         print(sql)
+        database_base.exec(sql)
+
+
+    def apply_re_search(self, table,info):
+        if table == '国家助学金': table = 'fundinfo1'
+        if table == '国家励志奖学金': table = 'fundinfo2'
+        if table == '国家助学贷款': table = 'fundinfo3'
+        if table == '1号奖助金': table = 'fundinfo4'
+        if table == '2号奖助金': table = 'fundinfo5'
+        if table == '校内资助金': table = 'fundinfo6'
+        sql = "select %s from %s where id=%s;" % (info, table, SI.student_id)
         return database_base.query2(sql)
