@@ -2,7 +2,6 @@
 import os
 import sys
 
-# from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QWidget
 from PySide2.QtGui import QImageReader
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication
@@ -59,7 +58,6 @@ class Win_Login(object):
                 self.ui.edit_password.setText('')
                 self.ui.hide()
 
-
 # 注册窗口
 class Win_register():
     def __init__(self):
@@ -78,6 +76,7 @@ class Win_register():
 extra = {
     # Font
     'font_family': '黑体',
+    'font_size': 20,
 }
 
 # QImageReader.supportedImageFormats()

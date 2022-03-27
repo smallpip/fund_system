@@ -56,7 +56,7 @@
          </size>
         </property>
         <property name="title">
-         <string>GroupBox</string>
+         <string/>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
@@ -104,21 +104,21 @@
          <item>
           <widget class="QLabel" name="label_huanyin">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
-             <verstretch>1</verstretch>
+             <verstretch>0</verstretch>
             </sizepolicy>
            </property>
            <property name="minimumSize">
             <size>
-             <width>130</width>
+             <width>0</width>
              <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>130</width>
-             <height>16777215</height>
+             <width>9999</width>
+             <height>50</height>
             </size>
            </property>
            <property name="text">
@@ -165,6 +165,7 @@
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>50</weight>
           <italic>false</italic>
           <bold>false</bold>
@@ -179,7 +180,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <property name="tabBarAutoHide">
          <bool>false</bool>
@@ -203,8 +204,8 @@
                <rect>
                 <x>20</x>
                 <y>90</y>
-                <width>81</width>
-                <height>16</height>
+                <width>101</width>
+                <height>21</height>
                </rect>
               </property>
               <property name="text">
@@ -216,7 +217,7 @@
                <rect>
                 <x>20</x>
                 <y>130</y>
-                <width>111</width>
+                <width>101</width>
                 <height>16</height>
                </rect>
               </property>
@@ -263,6 +264,19 @@
                <string>各院级贫困人数总图</string>
               </property>
              </widget>
+             <widget class="QPlainTextEdit" name="plainTextEdit">
+              <property name="geometry">
+               <rect>
+                <x>240</x>
+                <y>40</y>
+                <width>761</width>
+                <height>251</height>
+               </rect>
+              </property>
+              <property name="plainText">
+               <string>数据图，正在努力开发</string>
+              </property>
+             </widget>
             </widget>
             <widget class="QWidget" name="tab_21">
              <attribute name="title">
@@ -296,7 +310,7 @@
                <rect>
                 <x>11</x>
                 <y>63</y>
-                <width>151</width>
+                <width>165</width>
                 <height>221</height>
                </rect>
               </property>
@@ -970,7 +984,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_2">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_7">
              <attribute name="title">
@@ -989,10 +1003,20 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_33"/>
+                   <widget class="QLineEdit" name="search_id"/>
                   </item>
                   <item>
-                   <spacer name="horizontalSpacer_25">
+                   <widget class="QLabel" name="label_13">
+                    <property name="text">
+                     <string>请输入学院</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="search_college"/>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_2">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -1001,7 +1025,7 @@
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>800</width>
+                      <width>500</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -1019,17 +1043,27 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEdit_34"/>
+                   <widget class="QLineEdit" name="search_name"/>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="pushButton_2">
+                   <widget class="QLabel" name="label">
+                    <property name="text">
+                     <string>请输入班级</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLineEdit" name="search_class"/>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="button_search">
                     <property name="text">
                      <string>查询</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <spacer name="horizontalSpacer_26">
+                   <spacer name="horizontalSpacer_6">
                     <property name="orientation">
                      <enum>Qt::Horizontal</enum>
                     </property>
@@ -1038,7 +1072,7 @@
                     </property>
                     <property name="sizeHint" stdset="0">
                      <size>
-                      <width>700</width>
+                      <width>400</width>
                       <height>20</height>
                      </size>
                     </property>
@@ -1049,462 +1083,37 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_55">
                   <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_10">
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_38">
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_39">
-                        <item>
-                         <widget class="QLabel" name="label_34">
-                          <property name="text">
-                           <string>姓名：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_22"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_15">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_40">
-                        <item>
-                         <widget class="QLabel" name="label_35">
-                          <property name="text">
-                           <string>籍贯：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_23"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_16">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_41">
-                        <item>
-                         <widget class="QLabel" name="label_36">
-                          <property name="text">
-                           <string>电话号码：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_24"/>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_42">
-                      <item>
-                       <widget class="QLabel" name="label_37">
-                        <property name="text">
-                         <string>学院：</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QLineEdit" name="lineEdit_25"/>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_17">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_43">
-                        <item>
-                         <widget class="QLabel" name="label_38">
-                          <property name="text">
-                           <string>班级：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_26"/>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_44">
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_45">
-                        <item>
-                         <widget class="QLabel" name="label_39">
-                          <property name="text">
-                           <string>学号：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_27"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_18">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_46">
-                        <item>
-                         <widget class="QLabel" name="label_40">
-                          <property name="text">
-                           <string>出生年月：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_28"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_19">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_47">
-                        <item>
-                         <widget class="QOpenGLWidget" name="openGLWidget_3"/>
-                        </item>
-                        <item>
-                         <widget class="QLabel" name="label_41">
-                          <property name="text">
-                           <string>邮箱：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_29"/>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_48">
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_49">
-                        <item>
-                         <widget class="QLabel" name="label_42">
-                          <property name="text">
-                           <string>身份证号码：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_30"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_24">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_50">
-                        <item>
-                         <widget class="QLabel" name="label_43">
-                          <property name="text">
-                           <string>家庭居住地：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_31"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_20">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_51">
-                        <item>
-                         <widget class="QLabel" name="label_44">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize">
-                           <size>
-                            <width>80</width>
-                            <height>0</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>80</width>
-                            <height>16777215</height>
-                           </size>
-                          </property>
-                          <property name="text">
-                           <string>政治面貌：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_32">
-                          <property name="sizePolicy">
-                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                            <horstretch>0</horstretch>
-                            <verstretch>0</verstretch>
-                           </sizepolicy>
-                          </property>
-                          <property name="minimumSize">
-                           <size>
-                            <width>50</width>
-                            <height>0</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>50</width>
-                            <height>16777215</height>
-                           </size>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_52">
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_71">
-                        <item>
-                         <widget class="QLabel" name="label_62">
-                          <property name="text">
-                           <string>家庭收入：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QLineEdit" name="lineEdit_42"/>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_21">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_53">
-                        <item>
-                         <widget class="QLabel" name="label_45">
-                          <property name="text">
-                           <string>贫困类型</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QComboBox" name="comboBox_3">
-                          <item>
-                           <property name="text">
-                            <string>低保</string>
-                           </property>
-                          </item>
-                          <item>
-                           <property name="text">
-                            <string>残障</string>
-                           </property>
-                          </item>
-                          <item>
-                           <property name="text">
-                            <string>患病</string>
-                           </property>
-                          </item>
-                          <item>
-                           <property name="text">
-                            <string>单亲</string>
-                           </property>
-                          </item>
-                          <item>
-                           <property name="text">
-                            <string>其他</string>
-                           </property>
-                          </item>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                      <item>
-                       <spacer name="horizontalSpacer_22">
-                        <property name="orientation">
-                         <enum>Qt::Horizontal</enum>
-                        </property>
-                        <property name="sizeHint" stdset="0">
-                         <size>
-                          <width>40</width>
-                          <height>20</height>
-                         </size>
-                        </property>
-                       </spacer>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_54">
-                        <item>
-                         <widget class="QLabel" name="label_46">
-                          <property name="text">
-                           <string>家庭户口类型：</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QComboBox" name="comboBox_4">
-                          <item>
-                           <property name="text">
-                            <string>城镇</string>
-                           </property>
-                          </item>
-                          <item>
-                           <property name="text">
-                            <string>农村</string>
-                           </property>
-                          </item>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
                    <layout class="QVBoxLayout" name="verticalLayout_11">
                     <item>
-                     <widget class="QLabel" name="label_47">
-                      <property name="text">
-                       <string>照片</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="textEdit_4">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>150</width>
-                        <height>150</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>150</width>
-                        <height>150</height>
-                       </size>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <spacer name="verticalSpacer_14">
-                      <property name="orientation">
-                       <enum>Qt::Vertical</enum>
-                      </property>
-                      <property name="sizeHint" stdset="0">
-                       <size>
-                        <width>20</width>
-                        <height>40</height>
-                       </size>
-                      </property>
-                     </spacer>
+                     <widget class="QTableWidget" name="search_table"/>
                     </item>
                    </layout>
                   </item>
                  </layout>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_7">
+                <item>
+                 <spacer name="horizontalSpacer_7">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_search_detail">
+                  <property name="text">
+                   <string>查看</string>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </item>
@@ -1523,6 +1132,52 @@
               </item>
              </layout>
             </widget>
+            <widget class="QWidget" name="tab_16">
+             <attribute name="title">
+              <string>贫困生认定</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_24">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_18">
+                <item>
+                 <widget class="QLabel" name="label_17">
+                  <property name="text">
+                   <string>申请库</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_9">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_pinkun_refresh">
+                  <property name="text">
+                   <string>刷新</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <widget class="QTableWidget" name="tc_pinkun_id"/>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_28">
+             <attribute name="title">
+              <string>贫困生导入</string>
+             </attribute>
+            </widget>
            </widget>
           </item>
          </layout>
@@ -1535,7 +1190,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_4">
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="tab_12">
              <attribute name="title">
@@ -1543,61 +1198,176 @@
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_16">
               <item>
-               <widget class="QTableWidget" name="tableWidget_5">
-                <row>
-                 <property name="text">
-                  <string>记录1</string>
-                 </property>
-                </row>
-                <column>
-                 <property name="text">
-                  <string>时间</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>学号</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请人姓名</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请工作</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>附件</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>审核情况</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>操作</string>
-                 </property>
-                </column>
+               <widget class="QTabWidget" name="tabWidget_8">
+                <property name="currentIndex">
+                 <number>2</number>
+                </property>
+                <widget class="QWidget" name="tab_8">
+                 <attribute name="title">
+                  <string>国家助学金</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_10">
+                    <item>
+                     <spacer name="horizontalSpacer_8">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_all">
+                      <property name="text">
+                       <string>显示全部</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_need">
+                      <property name="text">
+                       <string>只显示未审核</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_sc">
+                      <property name="text">
+                       <string>排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_refresh">
+                      <property name="text">
+                       <string>刷新</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="table_guo1"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab_22">
+                 <attribute name="title">
+                  <string>国家励志奖学金</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_10">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_13">
+                    <item>
+                     <spacer name="horizontalSpacer_11">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_all_4">
+                      <property name="text">
+                       <string>显示全部</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_need_4">
+                      <property name="text">
+                       <string>只显示未审核</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_sc_4">
+                      <property name="text">
+                       <string>排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo2_refresh">
+                      <property name="text">
+                       <string>刷新</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="table_guo2"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab_25">
+                 <attribute name="title">
+                  <string>国家助学贷款</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_19">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_14">
+                    <item>
+                     <spacer name="horizontalSpacer_12">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_all_5">
+                      <property name="text">
+                       <string>显示全部</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_need_5">
+                      <property name="text">
+                       <string>只显示未审核</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_sc_5">
+                      <property name="text">
+                       <string>排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo3_refresh">
+                      <property name="text">
+                       <string>刷新</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="table_guo3"/>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_2">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>291</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </widget>
@@ -1607,61 +1377,121 @@
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_17">
               <item>
-               <widget class="QTableWidget" name="tableWidget_3">
-                <row>
-                 <property name="text">
-                  <string>记录1</string>
-                 </property>
-                </row>
-                <column>
-                 <property name="text">
-                  <string>时间</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>学号</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请人姓名</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请工作</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>附件</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>审核情况</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>操作</string>
-                 </property>
-                </column>
+               <widget class="QTabWidget" name="tabWidget_9">
+                <property name="currentIndex">
+                 <number>1</number>
+                </property>
+                <widget class="QWidget" name="tab_26">
+                 <attribute name="title">
+                  <string>1号奖学金</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_20">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_15">
+                    <item>
+                     <spacer name="horizontalSpacer_13">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_all_6">
+                      <property name="text">
+                       <string>显示全部</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_need_6">
+                      <property name="text">
+                       <string>只显示未审核</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_sc_6">
+                      <property name="text">
+                       <string>排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_she1_refresh">
+                      <property name="text">
+                       <string>刷新</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="table_she1"/>
+                  </item>
+                 </layout>
+                </widget>
+                <widget class="QWidget" name="tab_27">
+                 <attribute name="title">
+                  <string>2号奖学金</string>
+                 </attribute>
+                 <layout class="QVBoxLayout" name="verticalLayout_21">
+                  <item>
+                   <layout class="QHBoxLayout" name="horizontalLayout_16">
+                    <item>
+                     <spacer name="horizontalSpacer_14">
+                      <property name="orientation">
+                       <enum>Qt::Horizontal</enum>
+                      </property>
+                      <property name="sizeHint" stdset="0">
+                       <size>
+                        <width>40</width>
+                        <height>20</height>
+                       </size>
+                      </property>
+                     </spacer>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_all_7">
+                      <property name="text">
+                       <string>显示全部</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_need_7">
+                      <property name="text">
+                       <string>只显示未审核</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_guo1_sc_7">
+                      <property name="text">
+                       <string>排序</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QPushButton" name="button_she2_refresh">
+                      <property name="text">
+                       <string>刷新</string>
+                      </property>
+                     </widget>
+                    </item>
+                   </layout>
+                  </item>
+                  <item>
+                   <widget class="QTableWidget" name="table_she2"/>
+                  </item>
+                 </layout>
+                </widget>
                </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>291</height>
-                 </size>
-                </property>
-               </spacer>
               </item>
              </layout>
             </widget>
@@ -1671,61 +1501,52 @@
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_18">
               <item>
-               <widget class="QTableWidget" name="tableWidget_4">
-                <row>
-                 <property name="text">
-                  <string>记录1</string>
-                 </property>
-                </row>
-                <column>
-                 <property name="text">
-                  <string>时间</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>学号</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请人姓名</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>申请工作</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>附件</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>审核情况</string>
-                 </property>
-                </column>
-                <column>
-                 <property name="text">
-                  <string>操作</string>
-                 </property>
-                </column>
-               </widget>
+               <layout class="QHBoxLayout" name="horizontalLayout_17">
+                <item>
+                 <spacer name="horizontalSpacer_15">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_guo1_all_8">
+                  <property name="text">
+                   <string>显示全部</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_guo1_need_8">
+                  <property name="text">
+                   <string>只显示未审核</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_guo1_sc_8">
+                  <property name="text">
+                   <string>排序</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="button_xiao_refresh">
+                  <property name="text">
+                   <string>刷新</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
               </item>
               <item>
-               <spacer name="verticalSpacer_7">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>291</height>
-                 </size>
-                </property>
-               </spacer>
+               <widget class="QTableWidget" name="table_xiao1"/>
               </item>
              </layout>
             </widget>
@@ -1741,22 +1562,134 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_5">
             <property name="currentIndex">
-             <number>3</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_15">
              <attribute name="title">
               <string>工作岗位</string>
              </attribute>
-            </widget>
-            <widget class="QWidget" name="tab_16">
-             <attribute name="title">
-              <string>工作申请</string>
-             </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <item>
+               <widget class="QTableWidget" name="tableWidget_4">
+                <row>
+                 <property name="text">
+                  <string>记录1</string>
+                 </property>
+                </row>
+                <column>
+                 <property name="text">
+                  <string>时间</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>工作</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>操作</string>
+                 </property>
+                </column>
+                <item row="0" column="0">
+                 <property name="text">
+                  <string>2022/3/27</string>
+                 </property>
+                </item>
+                <item row="0" column="1">
+                 <property name="text">
+                  <string>xxx</string>
+                 </property>
+                </item>
+                <item row="0" column="2">
+                 <property name="text">
+                  <string>申请</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButton">
+                <property name="text">
+                 <string>工作发布</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="tab_17">
              <attribute name="title">
               <string>申请记录</string>
              </attribute>
+             <layout class="QHBoxLayout" name="horizontalLayout_12">
+              <item>
+               <layout class="QVBoxLayout" name="verticalLayout_22">
+                <item>
+                 <layout class="QVBoxLayout" name="verticalLayout_23">
+                  <item>
+                   <widget class="QLabel" name="label_72">
+                    <property name="text">
+                     <string>申请记录</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QTableWidget" name="tableWidget_5">
+                  <row>
+                   <property name="text">
+                    <string>记录1</string>
+                   </property>
+                  </row>
+                  <column>
+                   <property name="text">
+                    <string>时间</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>学号</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>申请人姓名</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>申请工作</string>
+                   </property>
+                  </column>
+                  <column>
+                   <property name="text">
+                    <string>审核情况</string>
+                   </property>
+                  </column>
+                 </widget>
+                </item>
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_76">
+                  <item>
+                   <widget class="QLabel" name="label_73">
+                    <property name="text">
+                     <string>如果审核失败请重新申请</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_10">
+                    <property name="text">
+                     <string>重新提交</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </widget>
             <widget class="QWidget" name="tab_18">
              <attribute name="title">
