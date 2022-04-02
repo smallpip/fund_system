@@ -317,8 +317,9 @@ class Win_Main:
 
 
 # 个人信息窗口
-class Win_student_change():
+class Win_student_change(Win_Main):
     def __init__(self):
+        super().__init__()
         self.ui = QUiLoader().load('UI/student_change.ui')
         self.ui.butto_sure.clicked.connect(self.onchangeout)
         self.ui.student_username_2.setText(SI.student_username)
@@ -335,6 +336,7 @@ class Win_student_change():
         self.ui.comboBox_hukou_2.setCurrentText(SI.comboBox_hukou)
         self.ui.student_birth_2.setText(SI.student_birth)
         self.ui.student_id_2.setText(SI.login_username)
+        self.ui.student_id_2.setFocusPolicy(QtCore.Qt.NoFocus)
 
     def onchangeout(self):
         SI.student_username_2 = self.ui.student_username_2.text().strip()
@@ -351,6 +353,19 @@ class Win_student_change():
         SI.student_income_2 = self.ui.student_income_2.text().strip()
         SI.comboBox_pinkun_2 = self.ui.comboBox_pinkun_2.currentText()
         SI.comboBox_hukou_2 = self.ui.comboBox_hukou_2.currentText()
+        SI.student_username = SI.student_username_2
+        SI.student_home = SI.student_home_2
+        SI.student_phone = SI.student_phone_2
+        SI.student_college = SI.student_college_2
+        SI.student_class = SI.student_class_2
+        SI.student_email = SI.student_email_2
+        SI.student_sfzid = SI.student_sfzid_2
+        SI.student_live = SI.student_live_2
+        SI.student_identity = SI.student_identity_2
+        SI.student_income = SI.student_income_2
+        SI.comboBox_pinkun = SI.comboBox_pinkun_2
+        SI.comboBox_hukou = SI.comboBox_hukou_2
+        SI.student_birth = SI.student_birth_2
         if not SI.student_id_2:
             QMessageBox.information(self.ui, 'Error', '请输入必选项', QMessageBox.Yes)
         else:

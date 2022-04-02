@@ -4,7 +4,7 @@ import sys
 
 from PySide2.QtGui import QImageReader
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QApplication
+from PySide2.QtWidgets import QApplication, QMessageBox
 from qt_material import apply_stylesheet
 
 from database import login_opreate
@@ -58,6 +58,7 @@ class Win_Login(object):
                 self.ui.edit_password.setText('')
                 self.ui.hide()
 
+
 # 注册窗口
 class Win_register():
     def __init__(self):
@@ -79,11 +80,12 @@ extra = {
     'font_size': 20,
 }
 
-# QImageReader.supportedImageFormats()
-app = QApplication(sys.argv)
-# app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
-SI.loginWin = Win_Login()
-# 添加样式
-apply_stylesheet(app, theme='light_pink.xml', invert_secondary=True, extra=extra)
-SI.loginWin.ui.show()
-app.exec_()
+if __name__ == "__main__":
+    # QImageReader.supportedImageFormats()
+    app = QApplication(sys.argv)
+    #   app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
+    SI.loginWin = Win_Login()
+    # 添加样式
+    apply_stylesheet(app, theme='light_pink.xml', invert_secondary=True, extra=extra)
+    SI.loginWin.ui.show()
+    app.exec_()

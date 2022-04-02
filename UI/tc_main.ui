@@ -180,7 +180,7 @@
          <enum>QTabWidget::North</enum>
         </property>
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <property name="tabBarAutoHide">
          <bool>false</bool>
@@ -199,83 +199,124 @@
              <attribute name="title">
               <string>总体情况</string>
              </attribute>
-             <widget class="QLabel" name="label_4">
+             <widget class="QWidget" name="verticalLayoutWidget">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>90</y>
-                <width>101</width>
-                <height>21</height>
+                <x>0</x>
+                <y>270</y>
+                <width>1151</width>
+                <height>331</height>
                </rect>
               </property>
-              <property name="text">
-               <string>在校总人数：</string>
-              </property>
+              <layout class="QVBoxLayout" name="tu1"/>
              </widget>
-             <widget class="QLabel" name="label_5">
+             <widget class="QWidget" name="">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>130</y>
-                <width>101</width>
-                <height>16</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>贫困生人数：</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_6">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>170</y>
-                <width>91</width>
-                <height>21</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>贫困生最多：</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_7">
-              <property name="geometry">
-               <rect>
-                <x>20</x>
-                <y>210</y>
-                <width>91</width>
-                <height>16</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>已资助人数：</string>
-              </property>
-             </widget>
-             <widget class="QGroupBox" name="groupBox_2">
-              <property name="geometry">
-               <rect>
-                <x>90</x>
-                <y>320</y>
-                <width>901</width>
+                <x>0</x>
+                <y>20</y>
+                <width>151</width>
                 <height>231</height>
                </rect>
               </property>
-              <property name="title">
-               <string>各院级贫困人数总图</string>
-              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_26">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_45">
+                 <item>
+                  <widget class="QLabel" name="label_4">
+                   <property name="text">
+                    <string>在校总人数：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="tu_label_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_44">
+                 <item>
+                  <widget class="QLabel" name="label_5">
+                   <property name="text">
+                    <string>贫困生人数：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="tu_label_2">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_43">
+                 <item>
+                  <widget class="QLabel" name="label_6">
+                   <property name="text">
+                    <string>贫困生最多：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="tu_label_3">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_42">
+                 <item>
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>已资助人数：</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="tu_label_4">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
              </widget>
-             <widget class="QPlainTextEdit" name="plainTextEdit">
+             <widget class="QWidget" name="">
               <property name="geometry">
                <rect>
-                <x>240</x>
-                <y>40</y>
-                <width>761</width>
-                <height>251</height>
+                <x>180</x>
+                <y>20</y>
+                <width>971</width>
+                <height>231</height>
                </rect>
               </property>
-              <property name="plainText">
-               <string>数据图，正在努力开发</string>
-              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_19">
+               <item>
+                <layout class="QVBoxLayout" name="tu2"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu3"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu4"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu5"/>
+               </item>
+              </layout>
              </widget>
             </widget>
             <widget class="QWidget" name="tab_21">
@@ -292,7 +333,7 @@
                </rect>
               </property>
               <property name="currentIndex">
-               <number>1</number>
+               <number>0</number>
               </property>
               <widget class="QWidget" name="tab_23">
                <attribute name="title">
@@ -429,7 +470,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_5">
              <attribute name="title">
@@ -460,10 +501,13 @@
                       <property name="text">
                        <string>照片</string>
                       </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
+                      </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QTextEdit" name="teacher_img">
+                     <widget class="QPushButton" name="pushButton_2">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -472,15 +516,12 @@
                       </property>
                       <property name="minimumSize">
                        <size>
-                        <width>150</width>
-                        <height>150</height>
+                        <width>160</width>
+                        <height>160</height>
                        </size>
                       </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>150</width>
-                        <height>150</height>
-                       </size>
+                      <property name="text">
+                       <string/>
                       </property>
                      </widget>
                     </item>
@@ -857,7 +898,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_3">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_10">
              <attribute name="title">
@@ -984,7 +1025,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_2">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab_7">
              <attribute name="title">
@@ -1190,7 +1231,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_4">
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tab_12">
              <attribute name="title">
@@ -1379,7 +1420,7 @@
               <item>
                <widget class="QTabWidget" name="tabWidget_9">
                 <property name="currentIndex">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <widget class="QWidget" name="tab_26">
                  <attribute name="title">
@@ -1562,7 +1603,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget_5">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab_15">
              <attribute name="title">
@@ -1707,14 +1748,27 @@
          <widget class="QPushButton" name="buttonChange">
           <property name="geometry">
            <rect>
-            <x>90</x>
-            <y>90</y>
+            <x>20</x>
+            <y>70</y>
             <width>93</width>
             <height>28</height>
            </rect>
           </property>
           <property name="text">
            <string>切换账号</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="yangshi">
+          <property name="geometry">
+           <rect>
+            <x>130</x>
+            <y>70</y>
+            <width>93</width>
+            <height>28</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>切换样式</string>
           </property>
          </widget>
         </widget>

@@ -26,9 +26,10 @@ class login_op(object):
                 QMessageBox.information(self.ui, 'Error', '密码不相等', QMessageBox.Yes)
 
     def login_in(self):
+        print(database_base.is_has(SI.login_username))
         if not SI.login_password:
             QMessageBox.information(self.ui, 'Error', '密码为空', QMessageBox.Yes)
-        elif database_base.is_has(SI.login_username) is None:
+        elif database_base.is_has(SI.login_username) is False:
             QMessageBox.information(self.ui, 'Error', '用户名不存在', QMessageBox.Yes)
         else:
             sql = "select distinct password from userinfo where username='%s'" % SI.login_username

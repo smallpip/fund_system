@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 from PySide2.QtWidgets import QMessageBox
 
 from database import database_base
@@ -143,20 +144,22 @@ class teacher_op():
     # 资助搜索
     def fund_search(self, table):
         print('fund_search已调用')
-        sql = "select time,id,name,audit from %s where fund='yes';" % (table)
+        sql = "select time,id,name,audit,file from %s where fund='yes';" % (table)
         return database_base.query2(sql)
 
     def check_reject(self, table, info):
-        print('check已调用')
         sql = "UPDATE %s SET audit='驳回' WHERE id='%s';" % (table, info)
+        database_base.exec(sql)
+        sql = "UPDATE studentinfo SET renzhen='已认证' WHERE id=%s;" % info
         database_base.exec(sql)
 
     def check_pass(self, table, info):
-        print('check已调用')
         sql = "UPDATE %s SET audit='已审核' WHERE id='%s';" % (table, info)
-        print(sql)
+        database_base.exec(sql)
+        sql = "UPDATE studentinfo SET renzhen='已认证' WHERE id=%s;" % info
         database_base.exec(sql)
 
+    #贫困认定搜索
     def pinkun_search(self):
         print('fund_search已调用')
         sql = "select time,id,name,identity from pinkuninfo ;"
@@ -166,13 +169,45 @@ class teacher_op():
         print('check已调用')
         sql = "UPDATE pinkuninfo SET identity='驳回' WHERE id='%s';" % info
         database_base.exec(sql)
+        sql = "UPDATE studentinfo SET renzhen='驳回' WHERE id=%s;" % info
+        database_base.exec(sql)
 
     def pinkun_pass(self, info):
         print('check已调用')
         sql = "UPDATE pinkuninfo SET identity='已认证' WHERE id='%s';" % info
-        print(sql)
         database_base.exec(sql)
+        sql = "UPDATE studentinfo SET renzhen='已认证' WHERE id=%s;" % info
+        database_base.exec(sql)
+   #绘图数据
+    def tu_kind_college(self):
+        sql="select distinct college from studentinfo where renzhen='已认证';"
+        data=database_base.query2(sql)
+        return list(data)
 
+    def tu_count_college(self):
+        sql = "select distinct college from studentinfo where renzhen='已认证';"
+        data = database_base.query2(sql)
+        data1=[]
+        for i in range(len(data)):
+            sql="select sum(college='%s') from studentinfo where renzhen='已认证';"%data[i][0]
+            data1.append(int(database_base.query(sql)))
+        data1 = list(map(int, data1))
+        return data1
+
+    def tu2_count(self):
+        sql = "select sum(renzhen='已认证') from studentinfo ;"
+        data = database_base.query(sql)
+        return data
+
+    def tu3_count(self):
+        sql = "select sum(zizhu='已资助') from studentinfo ;"
+        data = database_base.query(sql)
+        return data
+
+    def tu4_count(self):
+        sql = "select college,sum(renzhen='已认证') from studentinfo group by college; "
+        data = database_base.query2(sql)
+        return data
 
 def search_value(self, data):
     SI.search_name = data[0][0]
@@ -191,3 +226,8 @@ def search_value(self, data):
     SI.search_hukou = data[0][13]
     print("search_value")
     print(SI.search_name)
+#颜色随机
+def randomcolor(i):
+    colorArr = ['#fbffcf','#cfffeb','#d3cfff','#cfe3ff','#e3ffcf','#ffd3cf','#6a4dff']
+    color = colorArr[i]
+    return color

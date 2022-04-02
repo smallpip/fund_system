@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-
-from PySide2.QtCore import QDate, Qt
+import numpy as np
+from PySide2.QtCore import QDate, Qt, SIGNAL, QFile
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QMessageBox, QAbstractItemView, QHeaderView, QTableWidgetItem, QPushButton, QTableWidget, \
-    QHBoxLayout, QWidget, QGridLayout
-
+    QHBoxLayout, QWidget, QGridLayout, QFileDialog
 # 目录导入
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from qt_material import apply_stylesheet
-
 from database import teacher_operate, database_base, student_opreate
 from lib.share import SI
+import matplotlib.pyplot as plt
 
 
 class Win_tcmain:
@@ -83,6 +83,7 @@ class Win_tcmain:
         self.ui.table_guo1.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.ui.table_guo1.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.table_guo1.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.ui.table_guo1.itemClicked.connect(lambda: self.onFile(self.ui.table_guo1))  # 点击单元格触发
         fund = 'fundinfo1'
         self.table_fund_op(self.ui.table_guo1, fund.lstrip(''))
 
@@ -122,6 +123,15 @@ class Win_tcmain:
         self.ui.tc_pinkun_id.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.ui.tc_pinkun_id.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tc_pinkun_id.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+
+        # 绘图
+        plt.rcParams['font.family'] = 'sans-serif'
+        plt.rcParams['font.sans-serif'] = ['Microsoft Yahei']
+        self.portray1()
+        self.portray2()
+        self.portray3()
+        self.portray4()
+        self.portray5()
 
     # 登出
     def onSignOut(self):
@@ -262,11 +272,12 @@ class Win_tcmain:
                 item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
                 y = y + 1
             lb1 = QPushButton('审核')
-            table.setCellWidget(x, y + 1, lb1)
+            table.setCellWidget(x, y, lb1)
             lb1.clicked.connect(lambda: self.onCheck(table, fund))
             x = x + 1
         table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
 
+    # 贫困生认定
     def onCheck(self, table, fund):
         r = table.currentRow()
         SI.text = table.item(r, 1).text()
@@ -308,6 +319,114 @@ class Win_tcmain:
         SI.fund = fund.lstrip('')
         SI.teacher_check = Win_teacher_pinkun_check()
         SI.teacher_check.ui.show()
+
+    def onFile(self, table):
+        s = table.currentColumn()  # 返回当前列序号
+        r = table.currentRow()
+        value = table.item(r, 4).text()
+        if s == 4:
+            filename = QFileDialog.getOpenFileName(None, 'open file', value)
+            with open(filename[0], 'w+') as file:
+                my_txt = file.read()
+        # 问题：没有实现直接打开文件
+
+    def portray1(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu1.addWidget(self.canves)
+
+        agelist = teacher_operate.teacher_op.tu_count_college(self)
+        name = teacher_operate.teacher_op.tu_kind_college(self)
+        namelist = []
+        for i in range(len(name)):
+            namelist.append(name[i][0])
+        self.x = np.arange(len(namelist))
+        self.y = np.array(agelist)
+
+        plt.bar(range(len(namelist)), agelist, tick_label=namelist, color='#ffcfe3', width=0.5)
+        plt.title('各学院贫困生人数')
+        for i, j in zip(self.x, self.y):
+            plt.text(i, j + 0.5, '%d' % j, ha='center', va='center')
+
+        self.canves.draw()
+
+    def portray2(self):
+
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+        self.ui.tu2.addWidget(self.canves)
+
+        size = teacher_operate.teacher_op.tu_count_college(self)
+        name = teacher_operate.teacher_op.tu_kind_college(self)
+        namelist = []
+        for i in range(len(name)):
+            namelist.append(name[i][0])
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('各学院贫困生比例')
+
+        self.canves.draw()
+
+    def portray3(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu3.addWidget(self.canves)
+
+        size = [teacher_operate.teacher_op.tu2_count(self), SI.student_number]
+        namelist = ['贫困生人数', '总人数']
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('贫困生总比例')
+
+        self.canves.draw()
+
+    def portray4(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu4.addWidget(self.canves)
+
+        size = [teacher_operate.teacher_op.tu3_count(self), SI.student_number]
+        namelist = ['已资助人数', '总人数']
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('已资助占学生人数比')
+
+        self.canves.draw()
+
+    def portray5(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu5.addWidget(self.canves)
+
+        data = teacher_operate.teacher_op.tu4_count(self)
+        print(data)
+        namelist = []
+        size=[]
+        colors = []
+        for i in range(len(data)):
+            namelist.append(data[i][0])
+        for i in range(len(data)):
+            size.append(data[i][1])
+        print(size)
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('各学院贫困生比例')
+
+        self.canves.draw()
 
 
 # 老师信息修改
