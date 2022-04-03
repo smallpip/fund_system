@@ -26,6 +26,10 @@ class teacher_op():
             SI.teacher_id_2)
         database_base.exec(sql)
 
+    def teacher_college(self):
+        sql = "select college from teacherinfo where id='%s'"%SI.login_username
+        return database_base.query(sql)
+
     def publish_on(self, text):
         print("publish_on已调用")
         sql = "insert into newsinfo(content, time,username) VALUES('%s','%s','%s') " % (
@@ -209,6 +213,38 @@ class teacher_op():
         data = database_base.query2(sql)
         return data
 
+    def tu_kind_college_1(self):
+        sql="select distinct class from studentinfo where renzhen='已认证'and college='%s';"%SI.teacher_college
+        data=database_base.query2(sql)
+        return list(data)
+
+    def tu_count_college_1(self):
+        sql = "select distinct class from studentinfo where renzhen='已认证' and college='%s';"%SI.teacher_college
+        data = database_base.query2(sql)
+        data1=[]
+        for i in range(len(data)):
+            sql="select sum(class='%s') from studentinfo where renzhen='已认证'and college='%s';"%(data[i][0],SI.teacher_college)
+            data1.append(int(database_base.query(sql)))
+        data1 = list(map(int, data1))
+        return data1
+
+    def tu2_count_1(self):
+        sql = "select sum(renzhen='已认证') from studentinfo where college='%s';"%SI.teacher_college
+        data = database_base.query(sql)
+        return data
+
+    def tu3_count_1(self):
+        sql = "select sum(zizhu='已资助') from studentinfo where college='%s';"%SI.teacher_college
+        data = database_base.query(sql)
+        return data
+
+    def tu4_count_1(self):
+        sql = "select class,sum(renzhen='已认证') from studentinfo  where college='%s' group by class;"%SI.teacher_college
+        print(sql)
+        data = database_base.query2(sql)
+        return data
+
+
 def search_value(self, data):
     SI.search_name = data[0][0]
     SI.search_home = data[0][1]
@@ -228,6 +264,6 @@ def search_value(self, data):
     print(SI.search_name)
 #颜色随机
 def randomcolor(i):
-    colorArr = ['#fbffcf','#cfffeb','#d3cfff','#cfe3ff','#e3ffcf','#ffd3cf','#6a4dff']
+    colorArr = ['#fbffcf','#cfffeb','#d3cfff','#cfe3ff','#e3ffcf','#ffd3cf','#6a4dff','#ff8c69']
     color = colorArr[i]
     return color

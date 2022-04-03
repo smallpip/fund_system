@@ -199,24 +199,13 @@
              <attribute name="title">
               <string>总体情况</string>
              </attribute>
-             <widget class="QWidget" name="verticalLayoutWidget">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
                 <x>0</x>
-                <y>270</y>
-                <width>1151</width>
-                <height>331</height>
-               </rect>
-              </property>
-              <layout class="QVBoxLayout" name="tu1"/>
-             </widget>
-             <widget class="QWidget" name="">
-              <property name="geometry">
-               <rect>
-                <x>0</x>
-                <y>20</y>
-                <width>151</width>
-                <height>231</height>
+                <y>190</y>
+                <width>141</width>
+                <height>271</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_26">
@@ -294,13 +283,24 @@
                </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="">
+             <widget class="QWidget" name="layoutWidget">
               <property name="geometry">
                <rect>
-                <x>180</x>
-                <y>20</y>
-                <width>971</width>
-                <height>231</height>
+                <x>190</x>
+                <y>340</y>
+                <width>941</width>
+                <height>261</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="tu1"/>
+             </widget>
+             <widget class="QWidget" name="layoutWidget">
+              <property name="geometry">
+               <rect>
+                <x>190</x>
+                <y>50</y>
+                <width>941</width>
+                <height>251</height>
                </rect>
               </property>
               <layout class="QHBoxLayout" name="horizontalLayout_19">
@@ -318,138 +318,140 @@
                </item>
               </layout>
              </widget>
+             <widget class="QPushButton" name="tu_refresh">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>480</y>
+                <width>141</width>
+                <height>31</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>刷新</string>
+              </property>
+             </widget>
             </widget>
             <widget class="QWidget" name="tab_21">
              <attribute name="title">
               <string>院级情况</string>
              </attribute>
-             <widget class="QTabWidget" name="tabWidget_7">
+             <widget class="QWidget" name="layoutWidget_2">
               <property name="geometry">
                <rect>
-                <x>70</x>
-                <y>310</y>
-                <width>901</width>
-                <height>231</height>
+                <x>0</x>
+                <y>190</y>
+                <width>141</width>
+                <height>271</height>
                </rect>
               </property>
-              <property name="currentIndex">
-               <number>0</number>
-              </property>
-              <widget class="QWidget" name="tab_23">
-               <attribute name="title">
-                <string>各班级贫困图</string>
-               </attribute>
-              </widget>
-              <widget class="QWidget" name="tab_24">
-               <attribute name="title">
-                <string>低保人数图</string>
-               </attribute>
-              </widget>
-             </widget>
-             <widget class="QWidget" name="layoutWidget">
-              <property name="geometry">
-               <rect>
-                <x>11</x>
-                <y>63</y>
-                <width>165</width>
-                <height>221</height>
-               </rect>
-              </property>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
+              <layout class="QVBoxLayout" name="verticalLayout_28">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_25">
+                <layout class="QHBoxLayout" name="horizontalLayout_54">
                  <item>
-                  <widget class="QLabel" name="label_9">
+                  <widget class="QLabel" name="label_26">
                    <property name="text">
-                    <string>院级总人数：</string>
+                    <string>在校总人数：</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_13"/>
+                  <widget class="QLabel" name="tu_label_1_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                <layout class="QHBoxLayout" name="horizontalLayout_59">
                  <item>
-                  <widget class="QLabel" name="label_10">
+                  <widget class="QLabel" name="label_28">
                    <property name="text">
                     <string>贫困生人数：</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_14"/>
+                  <widget class="QLabel" name="tu_label_2_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_5">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_27">
+                <layout class="QHBoxLayout" name="horizontalLayout_60">
                  <item>
-                  <widget class="QLabel" name="label_11">
+                  <widget class="QLabel" name="label_29">
                    <property name="text">
                     <string>贫困生最多：</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_15"/>
+                  <widget class="QLabel" name="tu_label_3_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
                <item>
-                <spacer name="verticalSpacer_6">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_28">
+                <layout class="QHBoxLayout" name="horizontalLayout_61">
                  <item>
-                  <widget class="QLabel" name="label_8">
+                  <widget class="QLabel" name="label_30">
                    <property name="text">
                     <string>已资助人数：</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_16"/>
+                  <widget class="QLabel" name="tu_label_4_1">
+                   <property name="text">
+                    <string>1</string>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="layoutWidget_3">
+              <property name="geometry">
+               <rect>
+                <x>190</x>
+                <y>340</y>
+                <width>941</width>
+                <height>261</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="tu1_1"/>
+             </widget>
+             <widget class="QWidget" name="layoutWidget_4">
+              <property name="geometry">
+               <rect>
+                <x>190</x>
+                <y>50</y>
+                <width>941</width>
+                <height>251</height>
+               </rect>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_27">
+               <item>
+                <layout class="QVBoxLayout" name="tu2_1"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu3_1"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu4_1"/>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="tu5_1"/>
                </item>
               </layout>
              </widget>
@@ -470,7 +472,7 @@
           <item>
            <widget class="QTabWidget" name="tabWidget">
             <property name="currentIndex">
-             <number>1</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="tab_5">
              <attribute name="title">
@@ -880,11 +882,6 @@
                </layout>
               </item>
              </layout>
-            </widget>
-            <widget class="QWidget" name="tab_6">
-             <attribute name="title">
-              <string>账户信息</string>
-             </attribute>
             </widget>
            </widget>
           </item>

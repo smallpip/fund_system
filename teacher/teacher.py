@@ -125,6 +125,7 @@ class Win_tcmain:
         self.ui.tc_pinkun_id.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
         # 绘图
+        SI.teacher_college = teacher_operate.teacher_op.teacher_college(self)
         plt.rcParams['font.family'] = 'sans-serif'
         plt.rcParams['font.sans-serif'] = ['Microsoft Yahei']
         self.portray1()
@@ -132,6 +133,19 @@ class Win_tcmain:
         self.portray3()
         self.portray4()
         self.portray5()
+        self.ui.tu_label_1.setText(str(SI.student_number))
+        self.ui.tu_label_2.setText(str(teacher_operate.teacher_op.tu2_count(self)))
+        self.ui.tu_label_4.setText(str(teacher_operate.teacher_op.tu3_count(self)))
+        self.portray6()
+        self.portray7()
+        self.portray8()
+        self.portray9()
+        self.portray10()
+        self.ui.tu_label_1_1.setText(str(SI.student_class_number))
+        self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
+        self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
+        self.ui.tu_refresh.clicked.connect(self.tuRefresh)
+
 
     # 登出
     def onSignOut(self):
@@ -330,6 +344,7 @@ class Win_tcmain:
                 my_txt = file.read()
         # 问题：没有实现直接打开文件
 
+    # 绘图
     def portray1(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
@@ -348,6 +363,11 @@ class Win_tcmain:
         plt.title('各学院贫困生人数')
         for i, j in zip(self.x, self.y):
             plt.text(i, j + 0.5, '%d' % j, ha='center', va='center')
+        max = 0
+        for i in range(len(agelist)):
+            if max < agelist[i]:
+                max = agelist[i]
+        self.ui.tu_label_3.setText(str(max))
 
         self.canves.draw()
 
@@ -411,9 +431,112 @@ class Win_tcmain:
         self.ui.tu5.addWidget(self.canves)
 
         data = teacher_operate.teacher_op.tu4_count(self)
+        namelist = []
+        size = []
+        colors = []
+        for i in range(len(data)):
+            namelist.append(data[i][0])
+        for i in range(len(data)):
+            size.append(data[i][1])
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('各学院贫困生比例')
+
+        self.canves.draw()
+
+    def portray6(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu1_1.addWidget(self.canves)
+
+        agelist = teacher_operate.teacher_op.tu_count_college_1(self)
+        name = teacher_operate.teacher_op.tu_kind_college_1(self)
+        namelist = []
+        for i in range(len(name)):
+            namelist.append(name[i][0])
+        self.x = np.arange(len(namelist))
+        self.y = np.array(agelist)
+
+        plt.bar(range(len(namelist)), agelist, tick_label=namelist, color='#ffcfe3', width=0.5)
+        plt.title('各学院贫困生人数')
+        for i, j in zip(self.x, self.y):
+            plt.text(i, j + 0.5, '%d' % j, ha='center', va='center')
+        max = 0
+        for i in range(len(agelist)):
+            if max < agelist[i]:
+                max = agelist[i]
+        self.ui.tu_label_3.setText(str(max))
+
+        self.canves.draw()
+
+    def portray7(self):
+
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+        self.ui.tu2_1.addWidget(self.canves)
+
+        size = teacher_operate.teacher_op.tu_count_college_1(self)
+        name = teacher_operate.teacher_op.tu_kind_college_1(self)
+        namelist = []
+        print(size)
+        print(name)
+        for i in range(len(name)):
+            namelist.append(name[i][0])
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('各班级贫困生比例')
+
+        self.canves.draw()
+
+    def portray8(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu3_1.addWidget(self.canves)
+
+        size = [teacher_operate.teacher_op.tu2_count_1(self), SI.student_class_number]
+        namelist = ['贫困生人数', '总人数']
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('学院贫困生总比例')
+
+        self.canves.draw()
+
+    def portray9(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu4_1.addWidget(self.canves)
+
+        size = [teacher_operate.teacher_op.tu3_count_1(self), SI.student_class_number]
+        namelist = ['已资助人数', '总人数']
+        colors = []
+        for i in range(len(namelist)):
+            colors.append(teacher_operate.randomcolor(i))
+
+        plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
+        plt.title('已资助占学生人数比')
+
+        self.canves.draw()
+
+    def portray10(self):
+        self.figure = plt.figure(facecolor='#ffcfe3')
+        self.canves = FigureCanvas(self.figure)
+
+        self.ui.tu5_1.addWidget(self.canves)
+
+        data = teacher_operate.teacher_op.tu4_count_1(self)
         print(data)
         namelist = []
-        size=[]
+        size = []
         colors = []
         for i in range(len(data)):
             namelist.append(data[i][0])
@@ -424,9 +547,28 @@ class Win_tcmain:
             colors.append(teacher_operate.randomcolor(i))
 
         plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
-        plt.title('各学院贫困生比例')
+        plt.title('各班级贫困生比例')
 
         self.canves.draw()
+
+    def tuRefresh(self):
+        self.portray1()
+        self.portray2()
+        self.portray3()
+        self.portray4()
+        self.portray5()
+        self.ui.tu_label_1.setText(str(SI.student_number))
+        self.ui.tu_label_2.setText(str(teacher_operate.teacher_op.tu2_count(self)))
+        self.ui.tu_label_4.setText(str(teacher_operate.teacher_op.tu3_count(self)))
+        self.portray6()
+        self.portray7()
+        self.portray8()
+        self.portray9()
+        self.portray10()
+        self.ui.tu_label_1_1.setText(str(SI.student_class_number))
+        self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
+        self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
+
 
 
 # 老师信息修改
