@@ -32,7 +32,7 @@ class Win_Main:
         self.ui.student_img.setScaledContents(True)
 
         if database_base.is_has_student(SI.login_username) is False:  # 如果第一次登录没有表
-            sql = "INSERT INTO studentinfo(id) VALUES('%s')" % SI.login_username
+            sql = "INSERT INTO studentinfo(id,name,home,phone,college,class,birth,email,sfzid,live,identity,income,pinkun,hukou,renzhen,zizhu) VALUES('%s','无','无','无','无','无','无','无','无','无','无','无','无','无','无','无')" % SI.login_username
             database_base.exec(sql)
             print("已完成第一次学生建表")
 
@@ -140,11 +140,17 @@ class Win_Main:
         self.ui.table_pinkun_id.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.table_pinkun_id.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         #刷新
-        self.ui.button_pinkun_refresh.clicked.connect(lambda: self.table_pinkun_op(table=self.ui.table_guo))
+        self.ui.button_pinkun_refresh.clicked.connect(lambda: self.table_pinkun_op(table=self.ui.table_pinkun_id))
         #修改
         self.ui.button_pinkun_change.clicked.connect(lambda: self.onChange_pinkun(table=self.ui.table_pinkun_id))
         self.ui.button_pinkun_del.clicked.connect(lambda: self.onDelete_pinkun(table=self.ui.table_pinkun_id))
 
+        #工作表
+        self.table_job_publish_op(table=self.ui.table_job_1)
+        self.ui.table_job_1.setEditTriggers(QAbstractItemView.NoEditTriggers)  # 设置内容不可修改
+        self.ui.table_job_1.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 水平自适应
+        self.ui.table_job_1.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
+        self.ui.button_job_apply.clicked.connect(self.job_apply)
 
     # 公告显示
     def showNews(self, date):
@@ -201,6 +207,7 @@ class Win_Main:
         SI.apply_fund_re=fund_re
         SI.apply_kind = kind
         data_pinkun=student_opreate.student_op.apply_pinkun(self)
+        print(data_pinkun)
         if database_base.is_has_apply(SI.apply_fund, SI.student_id) is False :
             if data_pinkun is True:
                 SI.student_apply = Win_student_apply()
@@ -314,7 +321,43 @@ class Win_Main:
                 table.removeRow(selected_rows1[r] - r)  # 删除行
                 student_opreate.student_op.pinkun_out(self,id)
 
+    #工作建表
+    def table_job_publish_op(self,table):
+        data = teacher_operate.teacher_op.job_search(self)
+        print(data)
+        table.setColumnCount(7)
+        table.setHorizontalHeaderLabels(['时间', '地点', '工作名称', '工资', '联系人方式', '截止日期','工作时间'])
+        if data!=None:
+            a = 0
+            for i in data:
+                a = a + 1
+            table.setRowCount(a)
+            x = 0
+            for i in data:
+                y = 0
+                for j in i:
+                    content = QTableWidgetItem(str(data[x][y]))
+                    table.setItem(x, y, content)
+                    item = table.item(x, y)
+                    item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                    y = y + 1
+                x = x + 1
+            table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
 
+    def job_apply(self):
+        s_items = self.ui.table_job_1.selectedItems()  # 获取当前所有选择的items
+        if s_items:
+            selected_rows = []  # 求出所选择的行数
+            for i in s_items:
+                row = i.row()
+                if row not in selected_rows:
+                    selected_rows.append(row)
+            selected_rows1 = sorted(selected_rows)
+            for r in range(len(sorted(selected_rows1))):
+                id = SI.student_id
+                work_name = self.ui.table_job_1.item(selected_rows1[r] - r,2).text()
+                username=SI.student_username
+                student_opreate.student_op.job_apply(self, id,work_name,username)
 
 # 个人信息窗口
 class Win_student_change(Win_Main):

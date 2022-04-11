@@ -14,7 +14,7 @@ class login_op(object):
         if not SI.register_password and SI.confirm:  # 如果有一个密码或者密码确认框为空
             QMessageBox.information(self.ui, 'Error', '密码为空', QMessageBox.Yes)
         elif database_base.is_has(SI.register_username):  # 如果用户名已经存在\
-            QMessageBox.information(self.ui, 'Error', '密码已经存在', QMessageBox.Yes)
+            QMessageBox.information(self.ui, 'Error', '用户已经存在', QMessageBox.Yes)
         else:
             if SI.register_password == SI.confirm and SI.register_password:  # 如果两次密码一致，并且不为空
                 sql = "INSERT INTO userinfo(username, password) VALUES('%s','%s')" % (

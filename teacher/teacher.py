@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
+from PyQt5 import sip
 from PySide2.QtCore import QDate, Qt, SIGNAL, QFile
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QMessageBox, QAbstractItemView, QHeaderView, QTableWidgetItem, QPushButton, QTableWidget, \
@@ -40,7 +41,7 @@ class Win_tcmain:
 
         # 个人信息
         if database_base.is_has_teacher(SI.login_username) is False:  # 如果第一次登录没有表
-            sql = "INSERT INTO teacherinfo(id) VALUES('%s')" % SI.login_username
+            sql = "INSERT INTO teacherinfo(id,name,home,phone,college,email) VALUES('%s','无','无','无','无','无')" % SI.login_username
             database_base.exec(sql)
             print("已完成第一次老师建表")
         self.ui.teacher_id.setText(SI.login_username)
@@ -123,6 +124,7 @@ class Win_tcmain:
         self.ui.tc_pinkun_id.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.ui.tc_pinkun_id.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.ui.tc_pinkun_id.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
+        self.ui.button_pinkun_refresh.clicked.connect(lambda :self.table_pinkun_op(self.ui.tc_pinkun_id))
 
         # 绘图
         SI.teacher_college = teacher_operate.teacher_op.teacher_college(self)
@@ -136,16 +138,24 @@ class Win_tcmain:
         self.ui.tu_label_1.setText(str(SI.student_number))
         self.ui.tu_label_2.setText(str(teacher_operate.teacher_op.tu2_count(self)))
         self.ui.tu_label_4.setText(str(teacher_operate.teacher_op.tu3_count(self)))
-        self.portray6()
-        self.portray7()
-        self.portray8()
-        self.portray9()
-        self.portray10()
-        self.ui.tu_label_1_1.setText(str(SI.student_class_number))
-        self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
-        self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
+        if database_base.is_college(SI.teacher_college) is True:
+            self.portray6()
+            self.portray7()
+            self.portray8()
+            self.portray9()
+            self.portray10()
+            self.ui.tu_label_1_1.setText(str(SI.student_class_number))
+            self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
+            self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
         self.ui.tu_refresh.clicked.connect(self.tuRefresh)
 
+        #工作
+        self.ui.button_job_publish.clicked.connect(self.onJob)
+        self.table_job_publish_op(table=self.ui.table_joba)
+        self.ui.table_joba.setEditTriggers(QAbstractItemView.NoEditTriggers)  # 设置内容不可修改
+        self.ui.table_joba.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 水平自适应
+        self.ui.table_joba.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
+        self.ui.button_job_del.clicked.connect(self.onDelete_job)
 
     # 登出
     def onSignOut(self):
@@ -302,6 +312,7 @@ class Win_tcmain:
         SI.teacher_check.ui.show()
 
     def table_pinkun_op(self, table):
+        table.clearContents()
         data = teacher_operate.teacher_op.pinkun_search(self)
         table.setColumnCount(5)
         a = 0
@@ -348,7 +359,7 @@ class Win_tcmain:
     def portray1(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu1=self.canves
         self.ui.tu1.addWidget(self.canves)
 
         agelist = teacher_operate.teacher_op.tu_count_college(self)
@@ -376,7 +387,7 @@ class Win_tcmain:
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
         self.ui.tu2.addWidget(self.canves)
-
+        SI.tu2 = self.canves
         size = teacher_operate.teacher_op.tu_count_college(self)
         name = teacher_operate.teacher_op.tu_kind_college(self)
         namelist = []
@@ -393,7 +404,7 @@ class Win_tcmain:
     def portray3(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu3 = self.canves
         self.ui.tu3.addWidget(self.canves)
 
         size = [teacher_operate.teacher_op.tu2_count(self), SI.student_number]
@@ -410,7 +421,7 @@ class Win_tcmain:
     def portray4(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu4 = self.canves
         self.ui.tu4.addWidget(self.canves)
 
         size = [teacher_operate.teacher_op.tu3_count(self), SI.student_number]
@@ -427,7 +438,7 @@ class Win_tcmain:
     def portray5(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu5 = self.canves
         self.ui.tu5.addWidget(self.canves)
 
         data = teacher_operate.teacher_op.tu4_count(self)
@@ -440,7 +451,6 @@ class Win_tcmain:
             size.append(data[i][1])
         for i in range(len(namelist)):
             colors.append(teacher_operate.randomcolor(i))
-
         plt.pie(size, labels=namelist, colors=colors, autopct='%1.2f%%')
         plt.title('各学院贫困生比例')
 
@@ -449,7 +459,7 @@ class Win_tcmain:
     def portray6(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu1_1 = self.canves
         self.ui.tu1_1.addWidget(self.canves)
 
         agelist = teacher_operate.teacher_op.tu_count_college_1(self)
@@ -473,11 +483,10 @@ class Win_tcmain:
         self.canves.draw()
 
     def portray7(self):
-
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
         self.ui.tu2_1.addWidget(self.canves)
-
+        SI.tu2_1 = self.canves
         size = teacher_operate.teacher_op.tu_count_college_1(self)
         name = teacher_operate.teacher_op.tu_kind_college_1(self)
         namelist = []
@@ -496,7 +505,7 @@ class Win_tcmain:
     def portray8(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu3_1 = self.canves
         self.ui.tu3_1.addWidget(self.canves)
 
         size = [teacher_operate.teacher_op.tu2_count_1(self), SI.student_class_number]
@@ -513,7 +522,7 @@ class Win_tcmain:
     def portray9(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu4_1 = self.canves
         self.ui.tu4_1.addWidget(self.canves)
 
         size = [teacher_operate.teacher_op.tu3_count_1(self), SI.student_class_number]
@@ -530,7 +539,7 @@ class Win_tcmain:
     def portray10(self):
         self.figure = plt.figure(facecolor='#ffcfe3')
         self.canves = FigureCanvas(self.figure)
-
+        SI.tu5_1 = self.canves
         self.ui.tu5_1.addWidget(self.canves)
 
         data = teacher_operate.teacher_op.tu4_count_1(self)
@@ -550,8 +559,28 @@ class Win_tcmain:
         plt.title('各班级贫困生比例')
 
         self.canves.draw()
-
+    #图重新初始化
     def tuRefresh(self):
+        self.ui.tu1.removeWidget(SI.tu1)
+        SI.tu1.deleteLater()
+        self.ui.tu2.removeWidget(SI.tu2)
+        SI.tu2.deleteLater()
+        self.ui.tu3.removeWidget(SI.tu3)
+        SI.tu3.deleteLater()
+        self.ui.tu4.removeWidget(SI.tu4)
+        SI.tu4.deleteLater()
+        self.ui.tu5.removeWidget(SI.tu5)
+        SI.tu5.deleteLater()
+        self.ui.tu1_1.removeWidget(SI.tu1_1)
+        SI.tu1_1.deleteLater()
+        self.ui.tu2_1.removeWidget(SI.tu2_1)
+        SI.tu2_1.deleteLater()
+        self.ui.tu3_1.removeWidget(SI.tu3_1)
+        SI.tu3_1.deleteLater()
+        self.ui.tu4_1.removeWidget(SI.tu4_1)
+        SI.tu4_1.deleteLater()
+        self.ui.tu5_1.removeWidget(SI.tu5_1)
+        SI.tu5_1.deleteLater()
         self.portray1()
         self.portray2()
         self.portray3()
@@ -568,6 +597,50 @@ class Win_tcmain:
         self.ui.tu_label_1_1.setText(str(SI.student_class_number))
         self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
         self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
+    #工作
+    def onJob(self):
+        SI.job_table=self.ui.table_joba
+        SI.Win_job=Win_job_publish()
+        SI.Win_job.ui.show()
+    #工作发布表
+    def table_job_publish_op(self,table):
+        data = teacher_operate.teacher_op.job_search(self)
+        print(data)
+        table.setColumnCount(7)
+        table.setHorizontalHeaderLabels(['时间', '地点', '工作名称', '工资', '联系人方式', '截止日期','工作时间'])
+        if data!=None:
+            a = 0
+            for i in data:
+                a = a + 1
+            table.setRowCount(a)
+            x = 0
+            for i in data:
+                y = 0
+                for j in i:
+                    content = QTableWidgetItem(str(data[x][y]))
+                    table.setItem(x, y, content)
+                    item = table.item(x, y)
+                    item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                    y = y + 1
+                x = x + 1
+            table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
+
+    def onDelete_job(self):
+        print('删除所选择行')
+        s_items = self.ui.table_joba.selectedItems()  # 获取当前所有选择的items
+        if s_items:
+            selected_rows = []  # 求出所选择的行数
+            for i in s_items:
+                row = i.row()
+                if row not in selected_rows:
+                    selected_rows.append(row)
+            selected_rows1 = sorted(selected_rows)
+            for r in range(len(sorted(selected_rows1))):
+                text = self.ui.table_joba.item(selected_rows1[r] - r, 0).text()
+                self.ui.table_joba.removeRow(selected_rows1[r] - r)  # 删除行
+                print(text)
+                teacher_operate.teacher_op.job_del(self, text)
+
 
 
 
@@ -679,3 +752,27 @@ class Win_teacher_pinkun_check(Win_tcmain):
         teacher_operate.teacher_op.pinkun_pass(self, SI.search_id)
         SI.teacher_check.ui.close()
         self.table_pinkun_op(SI.table)  # 重新初始化表
+
+class Win_job_publish(Win_tcmain):
+    def __init__(self):
+        self.ui = QUiLoader().load('UI/job_publish.ui')
+        self.ui.button_publish.clicked.connect(self.on_job)
+        self.ui.button_back.clicked.connect(self.out_job)
+
+    def on_job(self):
+        SI.job_name=self.ui.job_name.text().strip()
+        SI.job_place=self.ui.job_place.text().strip()
+        SI.job_time=self.ui.job_time.text().strip()
+        SI.job_connect=self.ui.job_connect.text().strip()
+        SI.job_salary=self.ui.job_salary.text().strip()
+        SI.job_end=self.ui.job_end.text().strip()
+        teacher_operate.teacher_op.job_insert(self)
+        self.table_job_publish_op(SI.job_table)
+        SI.Win_job.ui.close()
+
+    def out_job(self):
+        SI.Win_job.ui.close()
+
+
+
+

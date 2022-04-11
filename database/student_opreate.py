@@ -126,8 +126,14 @@ class student_op():
 
     def apply_pinkun(self):
         sql = "select identity from pinkuninfo where id=%s " % SI.student_id
-        data=database_base.exec(sql)
-        if data=='驳回'or'未审核':
-            return False
-        else:
+        data=database_base.query(sql)
+        print(data)
+        if data=='已认证':
             return True
+        else:
+            return False
+
+    def job_apply(self,id,work_name,username):
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sql="insert into job_application(id,work_name,time,username,state) VALUES('%s','%s','%s','%s','已申请')"% (id,work_name,time,username)
+        database_base.exec(sql)

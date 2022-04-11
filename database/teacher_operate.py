@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
+from datetime import datetime
+
 from PySide2.QtWidgets import QMessageBox
 
 from database import database_base
@@ -27,7 +29,7 @@ class teacher_op():
         database_base.exec(sql)
 
     def teacher_college(self):
-        sql = "select college from teacherinfo where id='%s'"%SI.login_username
+        sql = "select college from teacherinfo where id='%s'" % SI.login_username
         return database_base.query(sql)
 
     def publish_on(self, text):
@@ -163,7 +165,7 @@ class teacher_op():
         sql = "UPDATE studentinfo SET renzhen='已认证' WHERE id=%s;" % info
         database_base.exec(sql)
 
-    #贫困认定搜索
+    # 贫困认定搜索
     def pinkun_search(self):
         print('fund_search已调用')
         sql = "select time,id,name,identity from pinkuninfo ;"
@@ -182,18 +184,19 @@ class teacher_op():
         database_base.exec(sql)
         sql = "UPDATE studentinfo SET renzhen='已认证' WHERE id=%s;" % info
         database_base.exec(sql)
-   #绘图数据
+
+    # 绘图数据
     def tu_kind_college(self):
-        sql="select distinct college from studentinfo where renzhen='已认证';"
-        data=database_base.query2(sql)
+        sql = "select distinct college from studentinfo where renzhen='已认证';"
+        data = database_base.query2(sql)
         return list(data)
 
     def tu_count_college(self):
         sql = "select distinct college from studentinfo where renzhen='已认证';"
         data = database_base.query2(sql)
-        data1=[]
+        data1 = []
         for i in range(len(data)):
-            sql="select sum(college='%s') from studentinfo where renzhen='已认证';"%data[i][0]
+            sql = "select sum(college='%s') from studentinfo where renzhen='已认证';" % data[i][0]
             data1.append(int(database_base.query(sql)))
         data1 = list(map(int, data1))
         return data1
@@ -214,36 +217,53 @@ class teacher_op():
         return data
 
     def tu_kind_college_1(self):
-        sql="select distinct class from studentinfo where renzhen='已认证'and college='%s';"%SI.teacher_college
-        data=database_base.query2(sql)
+        sql = "select distinct class from studentinfo where renzhen='已认证'and college='%s';" % SI.teacher_college
+        data = database_base.query2(sql)
         return list(data)
 
     def tu_count_college_1(self):
-        sql = "select distinct class from studentinfo where renzhen='已认证' and college='%s';"%SI.teacher_college
+        sql = "select distinct class from studentinfo where renzhen='已认证' and college='%s';" % SI.teacher_college
         data = database_base.query2(sql)
-        data1=[]
+        data1 = []
         for i in range(len(data)):
-            sql="select sum(class='%s') from studentinfo where renzhen='已认证'and college='%s';"%(data[i][0],SI.teacher_college)
+            sql = "select sum(class='%s') from studentinfo where renzhen='已认证'and college='%s';" % (
+            data[i][0], SI.teacher_college)
             data1.append(int(database_base.query(sql)))
         data1 = list(map(int, data1))
         return data1
 
     def tu2_count_1(self):
-        sql = "select sum(renzhen='已认证') from studentinfo where college='%s';"%SI.teacher_college
+        sql = "select sum(renzhen='已认证') from studentinfo where college='%s';" % SI.teacher_college
         data = database_base.query(sql)
         return data
 
     def tu3_count_1(self):
-        sql = "select sum(zizhu='已资助') from studentinfo where college='%s';"%SI.teacher_college
+        sql = "select sum(zizhu='已资助') from studentinfo where college='%s';" % SI.teacher_college
         data = database_base.query(sql)
         return data
 
     def tu4_count_1(self):
-        sql = "select class,sum(renzhen='已认证') from studentinfo  where college='%s' group by class;"%SI.teacher_college
+        sql = "select class,sum(renzhen='已认证') from studentinfo  where college='%s' group by class;" % SI.teacher_college
         print(sql)
         data = database_base.query2(sql)
         return data
 
+    # 工作
+    def job_insert(self):
+        print('已调用job_inert')
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        sql = "insert into job_pb(name,place,time,end,connect,salary,work_t) VALUES('%s','%s','%s','%s','%s','%s','%s') " % (
+            SI.job_name, SI.job_place, time, SI.job_end, SI.job_connect, SI.job_salary,SI.job_time)
+        database_base.exec(sql)
+
+    def job_search(self):
+        print('job_search')
+        sql="select time,place,name,salary,connect,end,work_t from job_pb"
+        return database_base.query2(sql)
+
+    def job_del(self, text):
+        sql = "delete from job_pb where name='%s' " % text
+        database_base.exec(sql)
 
 def search_value(self, data):
     SI.search_name = data[0][0]
@@ -262,8 +282,10 @@ def search_value(self, data):
     SI.search_hukou = data[0][13]
     print("search_value")
     print(SI.search_name)
-#颜色随机
+
+
+# 颜色随机
 def randomcolor(i):
-    colorArr = ['#fbffcf','#cfffeb','#d3cfff','#cfe3ff','#e3ffcf','#ffd3cf','#6a4dff','#ff8c69']
+    colorArr = ['#fbffcf', '#cfffeb', '#d3cfff', '#cfe3ff', '#e3ffcf', '#ffd3cf', '#6a4dff', '#ff8c69']
     color = colorArr[i]
     return color
