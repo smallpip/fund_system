@@ -3,7 +3,7 @@ from PySide2 import QtCore
 from PySide2.QtCore import QDate, Qt
 from PySide2.QtGui import QPixmap
 from PySide2.QtUiTools import QUiLoader
-from PySide2.QtWidgets import QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView, QFileDialog
+from PySide2.QtWidgets import QMessageBox, QTableWidgetItem, QAbstractItemView, QHeaderView, QFileDialog, QPushButton
 
 # 目录导入
 from qt_material import apply_stylesheet
@@ -23,9 +23,10 @@ class Win_Main:
         self.ui.info_change.clicked.connect(self.on_student_info_change)
         self.ui.button_refresh.clicked.connect(self.reget_info)
         self.ui.student_calendar.clicked[QDate].connect(self.showNews)
-        label_title = self.ui.label_title
-        apply_stylesheet(label_title, theme='light_pink.xml', extra={'font_size': 25, })
-
+        win = self.ui.widget
+        win.setObjectName("MainWindow2")
+        # #todo 1 设置窗口背景图片
+        win.setStyleSheet("#MainWindow2{border-image:url(./img/cool-background.png);}")
         # 个人信息
         pic = QPixmap('img/个人信息.jpg')
         self.ui.student_img.setPixmap(pic)
@@ -151,7 +152,14 @@ class Win_Main:
         self.ui.table_job_1.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 水平自适应
         self.ui.table_job_1.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
         self.ui.button_job_apply.clicked.connect(self.job_apply)
+        self.table_job_record_op(table=self.ui.table_job_record)
+        self.ui.button_job_re.clicked.connect(lambda :self.table_job_record_op(table=self.ui.table_job_record))
+        self.ui.table_job_record.setEditTriggers(QAbstractItemView.NoEditTriggers)  # 设置内容不可修改
+        self.ui.table_job_record.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 水平自适应
+        self.ui.table_job_record.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
 
+        #工作记录
+        # self.table_job_record_op(table=self.ui.table_job_2)
     # 公告显示
     def showNews(self, date):
         self.ui.student_news_table.clearContents()
@@ -344,6 +352,7 @@ class Win_Main:
                 x = x + 1
             table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
 
+    #工作申请
     def job_apply(self):
         s_items = self.ui.table_job_1.selectedItems()  # 获取当前所有选择的items
         if s_items:
@@ -356,8 +365,46 @@ class Win_Main:
             for r in range(len(sorted(selected_rows1))):
                 id = SI.student_id
                 work_name = self.ui.table_job_1.item(selected_rows1[r] - r,2).text()
+                place=self.ui.table_job_1.item(selected_rows1[r] - r,1).text()
+                salary=self.ui.table_job_1.item(selected_rows1[r] - r,3).text()
+                connect=self.ui.table_job_1.item(selected_rows1[r] - r,4).text()
+                end=self.ui.table_job_1.item(selected_rows1[r] - r,5).text()
+                work_t=self.ui.table_job_1.item(selected_rows1[r] - r,6).text()
                 username=SI.student_username
-                student_opreate.student_op.job_apply(self, id,work_name,username)
+                student_opreate.student_op.job_apply(self, id,work_name,username,place,salary,connect,end,work_t)
+        QMessageBox.information(self.ui, '提示', '申请成功', QMessageBox.Yes)
+    #工作记录
+    def table_job_record_op(self,table):
+        table.clearContents()
+        data = teacher_operate.teacher_op.job_search_2(self,SI.student_id)
+        print(data)
+        table.setColumnCount(5)
+        table.setHorizontalHeaderLabels(['时间','学号','工作名称','状态','操作'])
+        if data!=None:
+            a = 0
+            for i in data:
+                a = a + 1
+            table.setRowCount(a)
+            x = 0
+            for i in data:
+                y = 0
+                for j in i:
+                    content = QTableWidgetItem(str(data[x][y]))
+                    table.setItem(x, y, content)
+                    item = table.item(x, y)
+                    item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                    y = y + 1
+                lb1 = QPushButton('详情')
+                table.setCellWidget(x, y, lb1)
+                lb1.clicked.connect(lambda: self.onCheck_job(table))
+                x = x + 1
+            table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
+
+    def onCheck_job(self, table):
+        r = table.currentRow()
+        SI.text = table.item(r, 1).text()
+        SI.job_check = Win_student_job_check()
+        SI.job_check.ui.show()
 
 # 个人信息窗口
 class Win_student_change(Win_Main):
@@ -598,3 +645,20 @@ class Win_student_pinkun_change(Win_Main):
         self.ui.file_text.setPlainText(filename[0])
 
 
+class Win_student_job_check(Win_Main):
+    def __init__(self):
+        self.ui = QUiLoader().load('UI/job_record.ui')
+        data=student_opreate.student_op.job_search(self)
+        print(data)
+        self.ui.job_name.setText(data[0][0])
+        self.ui.job_place.setText(data[0][1])
+        self.ui.job_time.setText(data[0][2])
+        self.ui.job_connect.setText(data[0][3])
+        self.ui.job_salary.setText(data[0][4])
+        self.ui.job_end.setText(data[0][5])
+        self.ui.button_reapply.clicked.connect(self.job_unapply)
+
+    def job_unapply(self):
+        student_opreate.student_op.job_del(self,SI.student_id)
+        SI.job_check.ui.close()
+        QMessageBox.information(self.ui, '提示', '删除成功，请刷新', QMessageBox.Yes)

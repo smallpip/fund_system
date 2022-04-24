@@ -13,11 +13,23 @@ from lib.share import SI
 import matplotlib.pyplot as plt
 
 
+
 class Win_tcmain:
     def __init__(self, j=None):
         # super().__init__()
         # self.ui = uic.loadUi('fund_system/main.ui',self)
         self.ui = QUiLoader().load('UI/tc_main.ui')
+        # 设置对象名称
+        win=self.ui.centralwidget
+        win.setObjectName("MainWindow1")
+        # #todo 1 设置窗口背景图片
+        win.setStyleSheet("#MainWindow1{border-image:url(./img/cool-background.png);}")
+
+        win = self.ui.tabW_1
+        win.setObjectName("MainWindow2")
+        # #todo 1 设置窗口背景图片
+        win.setStyleSheet("#MainWindow2{border-image:url(./img/cool-background.png);}")
+
         self.ui.buttonChange.clicked.connect(self.onSignOut)  # 切换账号
         self.ui.button_tcchange.clicked.connect(self.on_teacher_info_change)  # 信息更新
         self.ui.button_refresh.clicked.connect(self.reget_info)
@@ -34,8 +46,6 @@ class Win_tcmain:
         self.ui.button_she2_refresh.clicked.connect(lambda: self.table_fund_op(self.ui.table_she2, fund='fundinfo5'))
         self.ui.button_xiao_refresh.clicked.connect(lambda: self.table_fund_op(self.ui.table_xiao1, fund='fundinfo6'))
 
-        label_title = self.ui.label_title
-        apply_stylesheet(label_title, theme='light_pink.xml', extra={'font_size': 25, })
         # tabWidget1 = self.ui.tabWidget1
         # apply_stylesheet(tabWidget1, theme='light_pink.xml', extra={'font_size': 20, })
 
@@ -157,6 +167,11 @@ class Win_tcmain:
         self.ui.table_joba.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
         self.ui.button_job_del.clicked.connect(self.onDelete_job)
 
+        #工作审核表
+        self.table_job_shenhe_op(table=self.ui.table_jobb)
+        self.ui.table_jobb.setEditTriggers(QAbstractItemView.NoEditTriggers)  # 设置内容不可修改
+        self.ui.table_jobb.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)  # 水平自适应
+        self.ui.table_jobb.verticalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)  # 垂直自适应
     # 登出
     def onSignOut(self):
         SI.mainWin.ui.hide()
@@ -471,7 +486,7 @@ class Win_tcmain:
         self.y = np.array(agelist)
 
         plt.bar(range(len(namelist)), agelist, tick_label=namelist, color='#ffcfe3', width=0.5)
-        plt.title('各学院贫困生人数')
+        plt.title('各班级贫困生人数')
         for i, j in zip(self.x, self.y):
             plt.text(i, j + 0.5, '%d' % j, ha='center', va='center')
         max = 0
@@ -597,6 +612,7 @@ class Win_tcmain:
         self.ui.tu_label_1_1.setText(str(SI.student_class_number))
         self.ui.tu_label_2_1.setText(str(teacher_operate.teacher_op.tu2_count_1(self)))
         self.ui.tu_label_4_1.setText(str(teacher_operate.teacher_op.tu3_count_1(self)))
+        QMessageBox.information(self.ui, 'Error', '刷新成功', QMessageBox.Yes)
     #工作
     def onJob(self):
         SI.job_table=self.ui.table_joba
@@ -636,12 +652,43 @@ class Win_tcmain:
                     selected_rows.append(row)
             selected_rows1 = sorted(selected_rows)
             for r in range(len(sorted(selected_rows1))):
-                text = self.ui.table_joba.item(selected_rows1[r] - r, 0).text()
+                text = self.ui.table_joba.item(selected_rows1[r] - r, 2).text()
                 self.ui.table_joba.removeRow(selected_rows1[r] - r)  # 删除行
                 print(text)
                 teacher_operate.teacher_op.job_del(self, text)
 
+    def table_job_shenhe_op(self, table):
+        table.clearContents()
+        data = teacher_operate.teacher_op.job_search_3(self)
+        print(data)
+        table.setColumnCount(5)
+        table.setHorizontalHeaderLabels(['时间', '学号', '工作名称', '状态', '操作'])
+        if data != None:
+            a = 0
+            for i in data:
+                a = a + 1
+            table.setRowCount(a)
+            x = 0
+            for i in data:
+                y = 0
+                for j in i:
+                    content = QTableWidgetItem(str(data[x][y]))
+                    table.setItem(x, y, content)
+                    item = table.item(x, y)
+                    item.setTextAlignment(Qt.AlignHCenter | Qt.AlignVCenter)
+                    y = y + 1
+                lb1 = QPushButton('审核')
+                table.setCellWidget(x, y, lb1)
+                lb1.clicked.connect(lambda: self.onCheck_job(table))
+                x = x + 1
+            table.sortItems(0, Qt.DescendingOrder)  # 指定列排序
 
+    def onCheck_job(self, table):
+        r = table.currentRow()
+        SI.id = table.item(r, 1).text()
+        SI.job_table=table
+        SI.job_check = Win_teacher_job_check()
+        SI.job_check.ui.show()
 
 
 # 老师信息修改
@@ -776,3 +823,27 @@ class Win_job_publish(Win_tcmain):
 
 
 
+class Win_teacher_job_check(Win_tcmain):
+    def __init__(self):
+        self.ui = QUiLoader().load('UI/tc_job_record.ui')
+        data=student_opreate.student_op.job_search(self)
+        print(data)
+        self.ui.job_name.setText(data[0][0])
+        self.ui.job_place.setText(data[0][1])
+        self.ui.job_time.setText(data[0][2])
+        self.ui.job_connect.setText(data[0][3])
+        self.ui.job_salary.setText(data[0][4])
+        self.ui.job_end.setText(data[0][5])
+
+        self.ui.button_reject.clicked.connect(self.onReject)  # 通过
+        self.ui.button_pass.clicked.connect(self.onPass)  # 驳回
+
+    def onReject(self):
+        teacher_operate.teacher_op.job_reject(self,SI.id)
+        SI.job_check.ui.close()
+        self.table_job_shenhe_op(SI.job_table)  # 重新初始化表
+
+    def onPass(self):
+        teacher_operate.teacher_op.job_pass(self, SI.id)
+        SI.job_check.ui.close()
+        self.table_job_shenhe_op(SI.job_table)  # 重新初始化表

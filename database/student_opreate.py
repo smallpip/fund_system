@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 
+from PySide2.QtWidgets import QMessageBox
+
 from database import database_base
 
 from lib.share import SI
@@ -133,7 +135,21 @@ class student_op():
         else:
             return False
 
-    def job_apply(self,id,work_name,username):
-        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        sql="insert into job_application(id,work_name,time,username,state) VALUES('%s','%s','%s','%s','已申请')"% (id,work_name,time,username)
+    def job_apply(self,id,work_name,username,place,salary,connect,end,work_t):
+        if database_base.is_h(d_name='id',info='%s'%SI.student_id,table='job_application')is False:
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            sql="insert into job_application(id,work_name,time,username,state,place,salary,connect,end,work_t) VALUES('%s','%s','%s','%s','已申请','%s','%s','%s','%s','%s')"% (id,work_name,time,username,place,salary,connect,end,work_t)
+            print(sql)
+            database_base.exec(sql)
+
+        else:
+            QMessageBox.information(self.ui, 'Error', '已申请', QMessageBox.Yes)
+
+    def job_search(self):
+        sql = "select work_name,place,work_t,connect,salary,end from job_application where id=%s"%SI.id
+        print(sql)
+        return database_base.query2(sql)
+
+    def job_del(self, id):
+        sql = "delete from job_application where id=%s " % id
         database_base.exec(sql)

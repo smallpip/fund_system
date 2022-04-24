@@ -78,6 +78,21 @@ def is_has(username):
     else:
         return False
 
+def is_h(d_name,info,table):
+    db = open()
+    cursor = db.cursor()
+    sql = "SELECT * FROM %s WHERE %s='%s'" % (table,d_name,info)
+    print(sql)
+    cursor.execute(sql)  # 执行mysql语句
+    db.commit()
+    data = cursor.fetchall()  # 获取所有的内容
+    cursor.close()
+    db.close()
+    if data:
+        return True
+    else:
+        return False
+
 def is_college(college):
     db = open()
     cursor = db.cursor()

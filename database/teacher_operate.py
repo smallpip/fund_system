@@ -255,15 +255,38 @@ class teacher_op():
         sql = "insert into job_pb(name,place,time,end,connect,salary,work_t) VALUES('%s','%s','%s','%s','%s','%s','%s') " % (
             SI.job_name, SI.job_place, time, SI.job_end, SI.job_connect, SI.job_salary,SI.job_time)
         database_base.exec(sql)
-
     def job_search(self):
         print('job_search')
         sql="select time,place,name,salary,connect,end,work_t from job_pb"
         return database_base.query2(sql)
 
+    def job_search_2(self,id):
+        print('job_search')
+        sql="select time,id,work_name,state from job_application where id='%s'"%id
+        print(sql)
+        return database_base.query2(sql)
+
+    def job_search_3(self):
+        print('job_search')
+        sql="select time,id,work_name,state from job_application"
+        return database_base.query2(sql)
+
     def job_del(self, text):
+        print('text')
+        print(text)
         sql = "delete from job_pb where name='%s' " % text
         database_base.exec(sql)
+
+    def job_pass(self,id):
+        sql = "UPDATE job_application SET state='已通过' WHERE id=%s;" % id
+        database_base.exec(sql)
+
+    def job_reject(self,id):
+        sql = "UPDATE job_application SET state='驳回' WHERE id=%s;" % id
+        database_base.exec(sql)
+
+
+
 
 def search_value(self, data):
     SI.search_name = data[0][0]
@@ -289,3 +312,4 @@ def randomcolor(i):
     colorArr = ['#fbffcf', '#cfffeb', '#d3cfff', '#cfe3ff', '#e3ffcf', '#ffd3cf', '#6a4dff', '#ff8c69']
     color = colorArr[i]
     return color
+

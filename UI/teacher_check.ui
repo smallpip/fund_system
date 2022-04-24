@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>826</width>
-    <height>362</height>
+    <width>872</width>
+    <height>438</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>方正粗黑宋简体</family>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>

@@ -2,7 +2,7 @@
 import os
 import sys
 
-from PySide2.QtGui import QImageReader
+from PySide2.QtGui import QImageReader, QPalette, QPixmap, QBrush
 from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication, QMessageBox
 from qt_material import apply_stylesheet
@@ -18,10 +18,13 @@ class Win_Login(object):
 
     def __init__(self):
         # 从文件中加载UI定义
-        # super().__init__()
-        # self.ui = uic.loadUi('fund_system/login.ui',self)
         self.ui = QUiLoader().load('UI/login.ui')
         # 页面设置
+        win = self.ui.widget
+        win.setObjectName("MainWindow2")
+        # #todo 1 设置窗口背景图片
+        win.setStyleSheet("#MainWindow2{border-image:url(./img/GIF 17-4-2022 下午 7-18-46.gif);}")
+
         lable_login = self.ui.lable_login
         apply_stylesheet(lable_login, theme='light_pink.xml', extra={'font_size': 50, })
         # 功能设置
@@ -44,21 +47,26 @@ class Win_Login(object):
             comtext = self.ui.combox_login.currentText()
             if comtext == "学生":
                 # 实例化一个窗口
-                SI.mainWin = student.Win_Main()
-                # 显示新窗口
-                SI.mainWin.ui.show()
-                # 清除密码
-                self.ui.edit_password.setText('')
-                self.ui.hide()
-            else:
-                SI.mainWin = teacher.Win_tcmain()
-                # 显示新窗口
-                SI.mainWin.ui.show()
-                # 清除密码
-                self.ui.edit_password.setText('')
-                self.ui.hide()
-
-
+                sf=login_opreate.login_op.login_match(self)
+                if sf==comtext:
+                    SI.mainWin = student.Win_Main()
+                    # 显示新窗口
+                    SI.mainWin.ui.show()
+                    # 清除密码
+                    self.ui.edit_password.setText('')
+                    self.ui.hide()
+                else:
+                    QMessageBox.information(self.ui, 'Error', '身份不匹配', QMessageBox.Yes)
+            if comtext == "老师":
+                sf = login_opreate.login_op.login_match(self)
+                if sf == comtext:
+                    SI.mainWin = teacher.Win_tcmain()
+                    SI.mainWin.ui.show()
+                    # 清除密码
+                    self.ui.edit_password.setText('')
+                    self.ui.hide()
+                else:
+                    QMessageBox.information(self.ui, 'Error', '身份不匹配', QMessageBox.Yes)
 # 注册窗口
 class Win_register():
     def __init__(self):
@@ -74,18 +82,11 @@ class Win_register():
         SI.loginWin.ui.show()
 
 
-extra = {
-    # Font
-    'font_family': '黑体',
-    'font_size': 20,
-}
-
 if __name__ == "__main__":
-    # QImageReader.supportedImageFormats()
     app = QApplication(sys.argv)
-    #   app.addLibraryPath(os.path.join(os.path.dirname(QtCore.__file__), "plugins"))
     SI.loginWin = Win_Login()
-    # 添加样式
-    apply_stylesheet(app, theme='light_pink.xml', invert_secondary=True, extra=extra)
+    # apply_stylesheet(app, theme='light_pink.xml', invert_secondary=True, extra=extra)
     SI.loginWin.ui.show()
     app.exec_()
+
+
